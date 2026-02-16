@@ -1,17 +1,121 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getAllPosts, getAllProjects } from '../lib/content';
 
+// Get recent posts and projects for the homepage
+const recentPosts = (await getAllPosts()).slice(0, 3);
+const recentProjects = (await getAllProjects()).slice(0, 3);
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<BaseLayout 
+  title="Home - My HomePage" 
+  description="Welcome to my personal website showcasing my projects and thoughts"
+>
+  <!-- Hero Section -->
+  <section class="text-center py-12 mb-12">
+    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      Welcome to My HomePage
+    </h1>
+    <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+      I'm a developer passionate about creating amazing web experiences. 
+      Explore my projects and read about my journey in tech.
+    </p>
+    <div class="mt-8 space-x-4">
+      <a href="/projects" class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors">
+        View Projects
+      </a>
+      <a href="/blog" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-md hover:bg-gray-50 transition-colors">
+        Read Blog
+      </a>
+    </div>
+  </section>
+
+  <!-- Recent Projects -->
+  {recentProjects.length > 0 && (
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">Recent Projects</h2>
+        <a href="/projects" class="text-blue-600 hover:text-blue-800">View all →</a>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {recentProjects.map((project) => (
+          <article class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+            {project.data.cover && (
+              <img 
+                src={project.data.cover} 
+                alt={project.data.title}
+                class="w-full h-40 object-cover rounded-md mb-4"
+              />
+            )}
+            <h3 class="font-semibold text-lg text-gray-900 mb-2">
+              <a href={`/projects/${project.slug}`} class="hover:text-blue-600">
+                {project.data.title}
+              </a>
+            </h3>
+            <p class="text-gray-600 mb-4">{project.data.description}</p>
+            {project.data.tags && (
+              <div class="flex flex-wrap gap-2">
+                {project.data.tags.map((tag) => (
+                  <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Recent Blog Posts -->
+  {recentPosts.length > 0 && (
+    <section>
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">Recent Posts</h2>
+        <a href="/blog" class="text-blue-600 hover:text-blue-800">View all →</a>
+      </div>
+      <div class="space-y-6">
+        {recentPosts.map((post) => (
+          <article class="border-b border-gray-200 pb-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+              <h3 class="font-semibold text-lg text-gray-900">
+                <a href={`/blog/${post.slug}`} class="hover:text-blue-600">
+                  {post.data.title}
+                </a>
+              </h3>
+              <time class="text-sm text-gray-500">
+                {new Date(post.data.date).toLocaleDateString('ja-JP')}
+              </time>
+            </div>
+            <p class="text-gray-600 mb-3">{post.data.description}</p>
+            {post.data.tags && (
+              <div class="flex flex-wrap gap-2">
+                {post.data.tags.map((tag) => (
+                  <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Empty State -->
+  {recentPosts.length === 0 && recentProjects.length === 0 && (
+    <section class="text-center py-12">
+      <div class="text-gray-500 mb-8">
+        <p class="text-lg mb-4">No content available yet.</p>
+        <p>Start by adding some projects and blog posts!</p>
+      </div>
+      <div class="space-y-4 text-sm text-gray-400">
+        <p>Add projects: <code class="bg-gray-100 px-2 py-1 rounded">src/content/projects/</code></p>
+        <p>Add blog posts: <code class="bg-gray-100 px-2 py-1 rounded">src/content/blog/</code></p>
+        <p>See: <code class="bg-gray-100 px-2 py-1 rounded">src/content/README.md</code> for guidelines</p>
+      </div>
+    </section>
+  )}
+</BaseLayout>

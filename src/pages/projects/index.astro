@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllProjects, formatDate } from '../../lib/content';
+
+const projects = await getAllProjects();
+---
+
+<BaseLayout 
+  title="Projects - My HomePage" 
+  description="Explore my portfolio of web development projects and experiments"
+>
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-4">Projects</h1>
+    <p class="text-gray-600">
+      Here's a collection of projects I've worked on. Each one represents a learning experience and a step forward in my development journey.
+    </p>
+  </div>
+
+  {projects.length > 0 ? (
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map((project) => (
+        <article class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+          {project.data.cover && (
+            <img 
+              src={project.data.cover} 
+              alt={project.data.title}
+              class="w-full h-48 object-cover"
+            />
+          )}
+          
+          <div class="p-6">
+            <div class="mb-4">
+              <h2 class="text-xl font-semibold text-gray-900 mb-2">
+                <a href={`/projects/${project.slug}`} class="hover:text-blue-600 transition-colors">
+                  {project.data.title}
+                </a>
+              </h2>
+              
+              {project.data.date && (
+                <time class="text-sm text-gray-500">
+                  {formatDate(project.data.date)}
+                </time>
+              )}
+            </div>
+            
+            <p class="text-gray-600 mb-4">
+              {project.data.description}
+            </p>
+            
+            {project.data.tags && project.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.data.tags.map((tag) => (
+                  <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+            
+            <a 
+              href={`/projects/${project.slug}`}
+              class="text-blue-600 hover:text-blue-800 font-medium text-sm"
+            >
+              Learn more →
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  ) : (
+    <div class="text-center py-12">
+      <div class="text-gray-500 mb-4">
+        <p class="text-lg mb-2">No projects yet!</p>
+        <p>Projects will appear here once I start adding them.</p>
+      </div>
+      <div class="text-sm text-gray-400">
+        <p>Add projects to: <code class="bg-gray-100 px-2 py-1 rounded">src/content/projects/</code></p>
+        <p>See content guidelines: <code class="bg-gray-100 px-2 py-1 rounded">src/content/README.md</code></p>
+      </div>
+    </div>
+  )}
+</BaseLayout>

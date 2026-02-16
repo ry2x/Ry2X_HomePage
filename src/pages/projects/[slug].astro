@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllProjects, formatDate } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const projects = await getAllProjects();
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<BaseLayout 
+  title={`${project.data.title} - Projects`} 
+  description={project.data.description}
+  image={project.data.cover}
+>
+  <article>
+    <!-- Back to Projects -->
+    <div class="mb-6">
+      <a href="/projects" class="text-blue-600 hover:text-blue-800 text-sm">
+        ← Back to Projects
+      </a>
+    </div>
+    
+    <!-- Project Header -->
+    <header class="mb-8">
+      {project.data.cover && (
+        <img 
+          src={project.data.cover} 
+          alt={project.data.title}
+          class="w-full h-64 md:h-80 object-cover rounded-lg mb-6"
+        />
+      )}
+      
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        {project.data.title}
+      </h1>
+      
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between text-sm text-gray-600 mb-4">
+        {project.data.date && (
+          <time>{formatDate(project.data.date)}</time>
+        )}
+        
+        {project.data.tags && project.data.tags.length > 0 && (
+          <div class="flex flex-wrap gap-2 mt-2 md:mt-0">
+            {project.data.tags.map((tag) => (
+              <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+      
+      <div class="border-b border-gray-200 mb-8"></div>
+    </header>
+    
+    <!-- Project Content -->
+    <div class="prose max-w-none">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
