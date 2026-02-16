@@ -1,0 +1,24 @@
+{
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Follow the A.G.E.N.T. principles for all commit messages:",
+      "explanation": "Master rule for the commit strategy."
+    },
+    {
+      "text": "1. **Atomic & Goal**: One single logical change and focus on one goal only.",
+      "explanation": "Ensures commit purity."
+    },
+    {
+      "text": "2. **Eight**: Summary within 8 words (excluding prefix).",
+      "explanation": "Strict length constraint."
+    },
+    {
+      "text": "3. **Next line & Minimal Detail**: 1st line=summary, 2nd line=blank. Detailed explanations start from 4th line. LIMIT details to maximum 3 short bullet points. If the change is simple, omit the details entirely.",
+      "explanation": "Prevents long descriptions and enforces 4th-line start."
+    },
+    {
+      "text": "4. **Tags**: Start with: ➕ ADD:, 🐛 FIX:, ✨ FEAT:, 🧹 CHORE:, ♻️ REFAC:.",
+      "explanation": "Mandatory emoji and tag usage."
+    }
+  ]
+}
