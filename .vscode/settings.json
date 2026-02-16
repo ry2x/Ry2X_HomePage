@@ -20,5 +20,6 @@
       "text": "4. **Tags**: Start with: ➕ ADD:, 🐛 FIX:, ✨ FEAT:, 🧹 CHORE:, ♻️ REFAC:.",
       "explanation": "Mandatory emoji and tag usage."
     }
-  ]
+  ],
+  "editor.tabSize": 2
 }
