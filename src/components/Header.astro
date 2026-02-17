@@ -1,41 +1,45 @@
 ---
 // Header component
+import DarkModeToggle from './DarkModeToggle.astro';
 ---
 
-<header class="border-b border-gray-200">
+<header class="border-b border-gray-200 dark:border-gray-700">
   <div class="container mx-auto px-4 py-6">
     <nav class="flex items-center justify-between">
       <div>
-        <a href="/" class="text-xl font-bold text-gray-900 hover:text-gray-700">
+        <a href="/" class="text-xl font-bold text-gray-900 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300">
           My HomePage
         </a>
       </div>
-      <ul class="flex space-x-6">
-        <li>
-          <a
-            href="/"
-            class="text-gray-600 transition-colors hover:text-gray-900"
-          >
-            Home
-          </a>
-        </li>
-        <li>
-          <a
-            href="/projects"
-            class="text-gray-600 transition-colors hover:text-gray-900"
-          >
-            Projects
-          </a>
-        </li>
-        <li>
-          <a
-            href="/blog"
-            class="text-gray-600 transition-colors hover:text-gray-900"
-          >
-            Blog
-          </a>
-        </li>
-      </ul>
+      <div class="flex items-center space-x-4">
+        <ul class="flex space-x-6">
+          <li>
+            <a
+              href="/"
+              class="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+            >
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              href="/projects"
+              class="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+            >
+              Projects
+            </a>
+          </li>
+          <li>
+            <a
+              href="/blog"
+              class="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+            >
+              Blog
+            </a>
+          </li>
+        </ul>
+        <DarkModeToggle />
+      </div>
     </nav>
   </div>
 </header>
