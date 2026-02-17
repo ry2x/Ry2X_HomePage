@@ -1,9 +1,9 @@
 ---
-title: "Welcome to My Blog"
-date: "2026-02-16"
-description: "This is my first blog post where I introduce myself and talk about what you can expect from this blog."
-tags: ["welcome", "introduction", "blog"]
-slug: "welcome-to-my-blog"
+title: 'Welcome to My Blog'
+date: '2026-02-16'
+description: 'This is my first blog post where I introduce myself and talk about what you can expect from this blog.'
+tags: ['welcome', 'introduction', 'blog']
+slug: 'welcome-to-my-blog'
 draft: false
 ---
 

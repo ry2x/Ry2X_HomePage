@@ -21,13 +21,13 @@ const { title, description, image } = Astro.props;
     <SEO title={title} description={description} image={image} />
   </head>
 
-  <body class="min-h-screen bg-white text-gray-900 flex flex-col">
+  <body class="flex min-h-screen flex-col bg-white text-gray-900">
     <Header />
-    
-    <main class="flex-grow container mx-auto px-4 py-8">
+
+    <main class="container mx-auto flex-grow px-4 py-8">
       <slot />
     </main>
-    
+
     <Footer />
   </body>
 </html>

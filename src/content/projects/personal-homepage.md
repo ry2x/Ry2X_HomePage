@@ -1,9 +1,9 @@
 ---
-title: "My Personal Homepage"
-date: "2026-02-16"
-description: "A modern, responsive personal homepage built with Astro, Tailwind CSS, and TypeScript."
-tags: ["astro", "tailwind", "typescript", "personal"]
-slug: "personal-homepage"
+title: 'My Personal Homepage'
+date: '2026-02-16'
+description: 'A modern, responsive personal homepage built with Astro, Tailwind CSS, and TypeScript.'
+tags: ['astro', 'tailwind', 'typescript', 'personal']
+slug: 'personal-homepage'
 draft: false
 ---
 

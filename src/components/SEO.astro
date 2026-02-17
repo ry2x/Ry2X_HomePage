@@ -6,11 +6,11 @@ interface Props {
   canonicalURL?: string;
 }
 
-const { 
+const {
   title = 'My HomePage',
   description = 'Welcome to my personal website',
   image = '/og-image.jpg',
-  canonicalURL = Astro.url.href
+  canonicalURL = Astro.url.href,
 } = Astro.props;
 ---
 
