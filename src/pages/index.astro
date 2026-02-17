@@ -1,154 +1,275 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getAllPosts, getAllProjects } from '../lib/content';
+import { getAllPosts } from '../lib/content';
 
-// Get recent posts and projects for the homepage
-const recentPosts = (await getAllPosts()).slice(0, 3);
-const recentProjects = (await getAllProjects()).slice(0, 3);
+const recentPosts = (await getAllPosts()).slice(0, 4);
 ---
 
 <BaseLayout
-  title="Home - My HomePage"
-  description="Welcome to my personal website showcasing my projects and thoughts"
+  title="Home - RY2X.DEV"
+  description="Developer building tools for Linux environments. Rust enthusiast."
 >
-  <!-- Hero Section -->
-  <section class="mb-12 py-12 text-center">
-    <h1 class="mb-4 text-4xl font-bold text-gray-900 dark:text-gray-100 md:text-5xl">
-      Welcome to My HomePage
-    </h1>
-    <p class="mx-auto max-w-2xl text-xl leading-relaxed text-gray-600 dark:text-gray-400">
-      I'm a developer passionate about creating amazing web experiences. Explore
-      my projects and read about my journey in tech.
-    </p>
-    <div class="mt-8 space-x-4">
+  <div class="grid auto-rows-[50px] grid-cols-1 gap-4 md:grid-cols-4">
+    <!-- Hero card — 3col × 4row -->
+    <div
+      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-3 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+    >
+      <div
+        class="absolute inset-0 bg-linear-to-br from-blue-600/30 via-purple-600/20 to-transparent"
+      >
+      </div>
+      <div class="relative flex h-full flex-col justify-end p-8">
+        <p
+          class="mb-1 font-mono text-[10px] tracking-widest text-blue-500 uppercase dark:text-blue-400"
+        >
+          Developer
+        </p>
+        <h1 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
+          RY2X
+        </h1>
+        <p class="max-w-xs text-sm text-gray-600 dark:text-gray-400">
+          Building tools for Linux environments. Using Rust for fun. Working with JAVA and Typescript professionally.
+        </p>
+        <div class="mt-4 flex gap-2">
+          <a
+            href="/projects"
+            class="rounded-full border border-blue-400/30 px-3 py-1 font-mono text-xs text-blue-500 transition-colors hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
+            >Projects →</a
+          >
+          <a
+            href="/blog"
+            class="rounded-full border border-gray-300 px-3 py-1 font-mono text-xs text-gray-500 transition-colors hover:text-gray-700 dark:border-white/10 dark:text-gray-400 dark:hover:text-gray-300"
+            >Blog →</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote card — 1col × 4row -->
+    <div
+      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+    >
+      <div
+        class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,0,0,0.02),transparent)] dark:bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.03),transparent)]"
+      >
+      </div>
+      <div class="relative flex h-full flex-col justify-center gap-3 p-6">
+        <span
+          class="font-serif text-6xl leading-none text-black/10 select-none dark:text-white/10"
+          >"</span
+        >
+        <p
+          class="text-center font-serif text-base leading-relaxed text-gray-800 italic dark:text-white/80"
+        >
+          Living is worthwhile if one can contribute in some small way to this
+          endless chain of progress.
+        </p>
+        <div>
+          <span
+            class="block text-right font-serif text-6xl leading-none text-black/10 select-none dark:text-white/10"
+            >"</span
+          >
+          <p
+            class="text-center font-mono text-[10px] text-gray-400 dark:text-gray-600"
+          >
+            — Paul A.M. Dirac
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects section label — 4col × 1row -->
+    <div
+      class="col-span-1 flex items-center rounded-2xl border border-gray-100 bg-gray-100 px-5 md:col-span-4 md:row-span-1 dark:border-white/5 dark:bg-zinc-900/50"
+    >
+      <span
+        class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-500"
+        >Projects</span
+      >
+      <div class="mx-4 h-px flex-1 bg-gray-200 dark:bg-white/5"></div>
       <a
         href="/projects"
-        class="rounded-md bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
+        class="font-mono text-[10px] text-gray-400 transition-colors hover:text-gray-900 dark:text-gray-500 dark:hover:text-white"
+        >View all →</a
       >
-        View Projects
-      </a>
+    </div>
+
+    <!-- par_TUI — 2col × 4row -->
+    <a
+      href="/projects/par_tui"
+      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+    >
+      <div
+        class="absolute inset-0 bg-linear-to-br from-blue-600/20 to-purple-600/20 transition-transform duration-500 group-hover:scale-110"
+      >
+      </div>
+      <div class="relative flex h-full flex-col justify-end p-8">
+        <div
+          class="mb-2 flex items-center gap-2 text-blue-500 dark:text-blue-400"
+        >
+          <span
+            class="rounded border border-blue-400/30 px-2 py-0.5 font-mono text-xs"
+            >Rust / TUI</span
+          >
+        </div>
+        <h3 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
+          par_TUI
+        </h3>
+        <p class="max-w-md text-sm text-gray-600 dark:text-gray-400">
+          Arch Linux update manager built with ratatui.
+        </p>
+      </div>
+    </a>
+
+    <!-- HyprBind — 2col × 4row -->
+    <a
+      href="/projects/hyprbind"
+      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+    >
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))] transition-opacity group-hover:opacity-80"
+      >
+      </div>
+      <div class="relative flex h-full flex-col justify-center p-6">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+          HyprBind
+        </h3>
+        <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
+          Keybinding viewer for Hyprland using egui.
+        </p>
+      </div>
+    </a>
+
+    <!-- Dotfiles — 1col × 4row -->
+    <a
+      href="/projects/dotfiles"
+      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+    >
+      <div
+        class="absolute inset-0 bg-linear-to-b from-emerald-500/10 to-transparent"
+      >
+      </div>
+      <div class="relative flex h-full flex-col p-6">
+        <span
+          class="mb-auto font-mono text-[10px] tracking-widest text-emerald-500 uppercase dark:text-emerald-400"
+          >Dotfiles</span
+        >
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+          Arch Linux + Hyprland
+        </h3>
+      </div>
+    </a>
+
+    <!-- COMMIT filler — 2col × 4row -->
+    <div
+      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+    >
+      <!-- light mode dots -->
+      <div
+        class="absolute inset-0 opacity-10 dark:hidden"
+        style="background-image: radial-gradient(#000000 0.5px, transparent 0.5px); background-size: 10px 10px;"
+      >
+      </div>
+      <!-- dark mode dots -->
+      <div
+        class="absolute inset-0 hidden opacity-20 dark:block"
+        style="background-image: radial-gradient(#ffffff 0.5px, transparent 0.5px); background-size: 10px 10px;"
+      >
+      </div>
+      <div
+        class="relative flex h-full flex-col items-center justify-center gap-3 p-8"
+      >
+        <div
+          class="text-5xl font-black text-black/10 italic transition-colors group-hover:text-black/20 dark:text-white/10 dark:group-hover:text-white/20"
+        >
+          COMMIT
+        </div>
+        <p class="text-xs text-gray-400 dark:text-gray-600">
+          Continuous development in Rust...
+        </p>
+      </div>
+    </div>
+
+    <!-- Zenn Blog — 1col × 4row -->
+    <a
+      href="https://zenn.dev"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+    >
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.1),transparent)] transition-opacity group-hover:opacity-80"
+      >
+      </div>
+      <div
+        class="relative flex h-full flex-col items-center justify-center gap-2 p-6"
+      >
+        <span
+          class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-600"
+          >External</span
+        >
+        <span
+          class="text-base font-bold text-gray-400 transition-colors group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+          >Zenn Blog ↗</span
+        >
+      </div>
+    </a>
+
+    <!-- Recent Blog section label — 4col × 1row -->
+    <div
+      class="col-span-1 flex items-center rounded-2xl border border-gray-100 bg-gray-100 px-5 md:col-span-4 md:row-span-1 dark:border-white/5 dark:bg-zinc-900/50"
+    >
+      <span
+        class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-500"
+        >Recent Blog</span
+      >
+      <div class="mx-4 h-px flex-1 bg-gray-200 dark:bg-white/5"></div>
       <a
         href="/blog"
-        class="rounded-md border border-gray-300 px-6 py-3 text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800"
+        class="font-mono text-[10px] text-gray-400 transition-colors hover:text-gray-900 dark:text-gray-500 dark:hover:text-white"
+        >View all →</a
       >
-        Read Blog
-      </a>
     </div>
-  </section>
 
-  <!-- Recent Projects -->
-  {
-    recentProjects.length > 0 && (
-      <section class="mb-12">
-        <div class="mb-6 flex items-center justify-between">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Recent Projects</h2>
-          <a href="/projects" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-            View all →
-          </a>
-        </div>
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {recentProjects.map((project) => (
-            <article class="rounded-lg border border-gray-200 p-6 transition-shadow hover:shadow-md dark:border-gray-700 dark:hover:shadow-gray-800">
-              {project.data.cover && (
-                <img
-                  src={project.data.cover}
-                  alt={project.data.title}
-                  class="mb-4 h-40 w-full rounded-md object-cover"
-                />
-              )}
-              <h3 class="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
-                <a
-                  href={`/projects/${project.slug}`}
-                  class="hover:text-blue-600 dark:hover:text-blue-400"
-                >
-                  {project.data.title}
-                </a>
-              </h3>
-              <p class="mb-4 text-gray-600 dark:text-gray-400">{project.data.description}</p>
-              {project.data.tags && (
-                <div class="flex flex-wrap gap-2">
-                  {project.data.tags.map((tag) => (
-                    <span class="rounded bg-gray-100 px-2 py-1 text-xs text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </article>
-          ))}
-        </div>
-      </section>
-    )
-  }
-
-  <!-- Recent Blog Posts -->
-  {
-    recentPosts.length > 0 && (
-      <section>
-        <div class="mb-6 flex items-center justify-between">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Recent Posts</h2>
-          <a href="/blog" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-            View all →
-          </a>
-        </div>
-        <div class="space-y-6">
-          {recentPosts.map((post) => (
-            <article class="border-b border-gray-200 pb-6 dark:border-gray-700">
-              <div class="mb-2 flex flex-col md:flex-row md:items-center md:justify-between">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  <a href={`/blog/${post.slug}`} class="hover:text-blue-600 dark:hover:text-blue-400">
-                    {post.data.title}
-                  </a>
-                </h3>
-                <time class="text-sm text-gray-500 dark:text-gray-400">
-                  {new Date(post.data.date).toLocaleDateString('ja-JP')}
-                </time>
+    <!-- Blog post cards — 2col × 4row each -->
+    {
+      recentPosts.map((post) => (
+        <a
+          href={`/blog/${post.slug}`}
+          class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-3 dark:border-white/10 dark:bg-zinc-900"
+        >
+          <div class="absolute inset-0 bg-black/2 transition-colors group-hover:bg-black/4 dark:bg-white/2 dark:group-hover:bg-white/4" />
+          <div class="relative flex h-full flex-col justify-center p-6">
+            <time class="mb-2 font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-600">
+              {new Date(post.data.date).toLocaleDateString('ja-JP')}
+            </time>
+            <h3 class="mb-1 text-lg font-bold text-gray-900 dark:text-white">
+              {post.data.title}
+            </h3>
+            <p class="line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
+              {post.data.description}
+            </p>
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="mt-3 flex flex-wrap gap-1.5">
+                {post.data.tags.map((tag) => (
+                  <span class="rounded-full border border-gray-300 px-2 py-0.5 font-mono text-[10px] text-gray-400 dark:border-white/10 dark:text-gray-500">
+                    {tag}
+                  </span>
+                ))}
               </div>
-              <p class="mb-3 text-gray-600 dark:text-gray-400">{post.data.description}</p>
-              {post.data.tags && (
-                <div class="flex flex-wrap gap-2">
-                  {post.data.tags.map((tag) => (
-                    <span class="rounded bg-gray-100 px-2 py-1 text-xs text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </article>
-          ))}
-        </div>
-      </section>
-    )
-  }
+            )}
+          </div>
+        </a>
+      ))
+    }
 
-  <!-- Empty State -->
-  {
-    recentPosts.length === 0 && recentProjects.length === 0 && (
-      <section class="py-12 text-center">
-        <div class="mb-8 text-gray-500 dark:text-gray-400">
-          <p class="mb-4 text-lg">No content available yet.</p>
-          <p>Start by adding some projects and blog posts!</p>
+    <!-- No posts placeholder -->
+    {
+      recentPosts.length === 0 && (
+        <div class="col-span-1 flex items-center justify-center rounded-3xl border border-gray-100 bg-gray-50 md:col-span-4 md:row-span-4 dark:border-white/5 dark:bg-zinc-900/30">
+          <p class="text-sm text-gray-400 dark:text-gray-600">No posts yet.</p>
         </div>
-        <div class="space-y-4 text-sm text-gray-400 dark:text-gray-500">
-          <p>
-            Add projects:{' '}
-            <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800">
-              src/content/projects/
-            </code>
-          </p>
-          <p>
-            Add blog posts:{' '}
-            <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800">src/content/blog/</code>
-          </p>
-          <p>
-            See:{' '}
-            <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800">
-              src/content/README.md
-            </code>{' '}
-            for guidelines
-          </p>
-        </div>
-      </section>
-    )
-  }
+      )
+    }
+  </div>
 </BaseLayout>

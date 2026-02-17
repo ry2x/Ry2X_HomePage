@@ -22,7 +22,10 @@ const { Content } = await project.render();
   <article>
     <!-- Back to Projects -->
     <div class="mb-6">
-      <a href="/projects" class="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+      <a
+        href="/projects"
+        class="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+      >
         ← Back to Projects
       </a>
     </div>
@@ -39,12 +42,14 @@ const { Content } = await project.render();
         )
       }
 
-      <h1 class="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-100 md:text-4xl">
+      <h1
+        class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl dark:text-gray-100"
+      >
         {project.data.title}
       </h1>
 
       <div
-        class="mb-4 flex flex-col text-sm text-gray-600 dark:text-gray-400 md:flex-row md:items-center md:justify-between"
+        class="mb-4 flex flex-col text-sm text-gray-600 md:flex-row md:items-center md:justify-between dark:text-gray-400"
       >
         {project.data.date && <time>{formatDate(project.data.date)}</time>}
 

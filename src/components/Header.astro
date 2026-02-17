@@ -10,12 +10,19 @@ const navItems = [
 ---
 
 <header class="fixed top-4 left-1/2 z-50 -translate-x-1/2">
-  <div class="flex items-center gap-6 rounded-full border border-gray-200 bg-white/80 px-5 py-3 shadow-lg shadow-black/5 backdrop-blur-xl dark:border-white/10 dark:bg-gray-950/80 dark:shadow-black/20">
-
+  <div
+    class="flex items-center gap-6 rounded-full border border-gray-200 bg-white/80 px-5 py-3 shadow-lg shadow-black/5 backdrop-blur-xl dark:border-white/10 dark:bg-gray-950/80 dark:shadow-black/20"
+  >
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 shrink-0">
-      <div class="h-7 w-7 rounded-full bg-gradient-to-br from-blue-500 to-purple-600"></div>
-      <span class="text-sm font-bold tracking-tighter text-gray-900 dark:text-white">RY2X.DEV</span>
+    <a href="/" class="flex shrink-0 items-center gap-2">
+      <div
+        class="h-7 w-7 rounded-full bg-linear-to-br from-blue-500 to-purple-600"
+      >
+      </div>
+      <span
+        class="text-sm font-bold tracking-tighter text-gray-900 dark:text-white"
+        >RY2X.DEV</span
+      >
     </a>
 
     <!-- Divider -->
@@ -23,29 +30,30 @@ const navItems = [
 
     <!-- Nav -->
     <nav class="hidden items-center gap-6 md:flex">
-      {navItems.map((item) => (
-        <a
-          href={item.href}
-          class="text-xs font-medium uppercase tracking-widest text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-        >
-          {item.name}
-        </a>
-      ))}
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-xs font-medium tracking-widest text-gray-500 uppercase transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+          >
+            {item.name}
+          </a>
+        ))
+      }
     </nav>
 
     <!-- Divider -->
-    <div class="hidden h-4 w-px bg-gray-200 dark:bg-white/10 md:block"></div>
+    <div class="hidden h-4 w-px bg-gray-200 md:block dark:bg-white/10"></div>
 
     <!-- Actions -->
     <div class="flex items-center gap-3">
       <DarkModeToggle />
       <a
         href="mailto:contact@example.com"
-        class="rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-gray-700 transition-all hover:bg-gray-100 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+        class="rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-xs font-medium tracking-widest text-gray-700 uppercase transition-all hover:bg-gray-100 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
       >
         Contact ↗
       </a>
     </div>
-
   </div>
 </header>
