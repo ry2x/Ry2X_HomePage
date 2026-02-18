@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
 import { getAllPosts } from '../lib/content';
 import dotfileImg from '/public/assets/home/dotfile.avif';
 import diracImg from '/public/assets/home/Paul_Dirac_1933.jpg';
@@ -253,7 +254,10 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
           >
           <span
             class="text-base font-bold text-gray-400 transition-colors group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-            >GitHub ↗</span
+            ><Icon
+              name="octicon:mark-github-16"
+              class="mr-1 inline-block h-5 w-5"
+            /> GitHub ↗</span
           >
         </div>
       </a>
@@ -278,7 +282,8 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
           >
           <span
             class="text-base font-bold text-gray-400 transition-colors group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-            >Zenn Blog ↗</span
+            ><Icon name="octicon:note-16" class="mr-1 inline-block h-5 w-5" />
+            Zenn Blog ↗</span
           >
         </div>
       </a>
