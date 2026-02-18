@@ -11,7 +11,7 @@ const navItems = [
 
 <header class="fixed top-4 left-1/2 z-[70] w-4/5 -translate-x-1/2 md:w-auto">
   <div
-    class="flex w-full items-center gap-6 rounded-full border border-gray-200 bg-white/80 px-5 py-3 shadow-lg shadow-black/5 backdrop-blur-xl dark:border-white/10 dark:bg-gray-950/80 dark:shadow-black/20 md:w-auto"
+    class="flex w-full items-center gap-6 rounded-full border border-gray-200 bg-white/80 px-5 py-3 shadow-lg shadow-black/5 backdrop-blur-xl md:w-auto dark:border-white/10 dark:bg-gray-950/80 dark:shadow-black/20"
   >
     <!-- Logo -->
     <a href="/" class="flex shrink-0 items-center gap-2">
@@ -53,7 +53,7 @@ const navItems = [
       <DarkModeToggle />
       <a
         href="mailto:contact@example.com"
-        class="hidden whitespace-nowrap rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-xs font-medium tracking-widest text-gray-700 uppercase transition-all hover:bg-gray-100 md:inline-flex dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+        class="hidden rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-xs font-medium tracking-widest whitespace-nowrap text-gray-700 uppercase transition-all hover:bg-gray-100 md:inline-flex dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
       >
         Contact ↗
       </a>
@@ -70,9 +70,15 @@ const navItems = [
     aria-label="Toggle menu"
     aria-expanded="false"
   >
-    <span class="hamburger-line block h-px w-5 bg-gray-500 transition-all duration-300 dark:bg-gray-400"></span>
-    <span class="hamburger-line block h-px w-5 bg-gray-500 transition-all duration-300 dark:bg-gray-400"></span>
-    <span class="hamburger-line block h-px w-5 bg-gray-500 transition-all duration-300 dark:bg-gray-400"></span>
+    <span
+      class="hamburger-line block h-px w-5 bg-gray-500 transition-all duration-300 dark:bg-gray-400"
+    ></span>
+    <span
+      class="hamburger-line block h-px w-5 bg-gray-500 transition-all duration-300 dark:bg-gray-400"
+    ></span>
+    <span
+      class="hamburger-line block h-px w-5 bg-gray-500 transition-all duration-300 dark:bg-gray-400"
+    ></span>
   </button>
 </header>
 
