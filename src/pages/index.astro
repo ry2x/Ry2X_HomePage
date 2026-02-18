@@ -132,24 +132,31 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
       class="group relative col-span-1 min-h-52 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
     >
       <div
-        class="absolute inset-0 bg-linear-to-br from-blue-600/20 to-purple-600/20 transition-transform duration-500 group-hover:scale-110"
+        class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))] transition-opacity group-hover:opacity-80"
       >
       </div>
+      <!-- 3D screenshot -->
+      <div
+        class="pointer-events-none absolute inset-0 flex items-center justify-end"
+        style="perspective: 600px;"
+      >
+        <img
+          src="/assets/home/par_tui.png"
+          alt=""
+          aria-hidden="true"
+          class="w-[72%] origin-right rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.03]"
+          style="transform: rotateY(-22deg) rotateX(6deg) translateX(8%) translateY(4%); opacity: 0.92;"
+        />
+      </div>
       <div class="relative flex h-full flex-col justify-end p-8">
-        <div
-          class="mb-2 flex items-center gap-2 text-blue-500 dark:text-blue-400"
-        >
-          <span
-            class="rounded border border-blue-400/30 px-2 py-0.5 font-mono text-xs"
-            >Rust / TUI</span
-          >
+        <div class="w-1/2">
+          <h3 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
+            par_TUI
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Arch Linux update manager <br /> built with ratatui.
+          </p>
         </div>
-        <h3 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
-          par_TUI
-        </h3>
-        <p class="max-w-md text-sm text-gray-600 dark:text-gray-400">
-          Arch Linux update manager built with ratatui.
-        </p>
       </div>
     </a>
 
@@ -162,13 +169,28 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))] transition-opacity group-hover:opacity-80"
       >
       </div>
-      <div class="relative flex h-full flex-col justify-center p-6">
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white">
-          HyprBind
-        </h3>
-        <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
-          Keybinding viewer for Hyprland using egui.
-        </p>
+      <!-- 3D screenshot -->
+      <div
+        class="pointer-events-none absolute inset-0 flex items-center justify-end"
+        style="perspective: 600px;"
+      >
+        <img
+          src="/assets/home/hyprbind.png"
+          alt=""
+          aria-hidden="true"
+          class="w-[72%] origin-right rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.03]"
+          style="transform: rotateY(-22deg) rotateX(6deg) translateX(8%) translateY(4%); opacity: 0.92;"
+        />
+      </div>
+      <div class="relative flex h-full flex-col justify-end p-8">
+        <div class="w-1/2">
+          <h3 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
+            HyprBind
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Keybinding viewer <br /> for Hyprland using egui.
+          </p>
+        </div>
       </div>
     </a>
 
@@ -283,7 +305,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
           <span
             class="text-base font-bold text-gray-400 transition-colors group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
             ><Icon name="octicon:note-16" class="mr-1 inline-block h-5 w-5" />
-            Zenn Blog ↗</span
+            Zenn ↗</span
           >
         </div>
       </a>
