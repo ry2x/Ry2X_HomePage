@@ -340,9 +340,9 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
       recentPosts.map((post) => (
         <a
           href={`/blog/${post.slug}`}
-          class="group relative col-span-1 min-h-40 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-3 dark:border-white/10 dark:bg-zinc-900"
+          class="hero-card group relative col-span-1 min-h-40 overflow-hidden rounded-3xl border border-gray-200 md:col-span-2 md:row-span-3 dark:border-white/10"
         >
-          <div class="absolute inset-0 bg-black/2 transition-colors group-hover:bg-black/4 dark:bg-white/2 dark:group-hover:bg-white/4" />
+          <div class="hero-card-glow absolute inset-0" />
           <div class="relative flex h-full flex-col justify-center p-6">
             <time class="mb-2 font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-600">
               {new Date(post.data.date).toLocaleDateString('ja-JP')}
