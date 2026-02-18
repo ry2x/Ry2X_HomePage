@@ -10,4 +10,6 @@ RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && sudo corepack enable
 
 # Set `DEVCONTAINER` environment variable to help with orientation
+# If you want to connect devcontainer from local terminal, command is:
+# docker exec -it -u node inspiring_taussig /bin/bash
 ENV DEVCONTAINER=true
