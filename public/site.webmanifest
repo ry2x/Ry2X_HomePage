@@ -1,0 +1,16 @@
+{
+  "name": "Ry2X.NET",
+  "short_name": "Ry2X",
+  "description": "Developer building tools for Linux environments. Rust enthusiast.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#080808",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
