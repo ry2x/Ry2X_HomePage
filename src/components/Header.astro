@@ -1,6 +1,8 @@
 ---
 // Header component - Dynamic Island style
+import { Image } from 'astro:assets';
 import DarkModeToggle from './DarkModeToggle.astro';
+import profileImg from '/public/assets/home/profile.png';
 
 const navItems = [
   { name: 'Home', href: '/' },
@@ -15,10 +17,12 @@ const navItems = [
   >
     <!-- Logo -->
     <a href="/" class="flex shrink-0 items-center gap-2">
-      <div
-        class="h-7 w-7 rounded-full bg-linear-to-br from-blue-500 to-purple-600"
-      >
-      </div>
+      <Image
+        src={profileImg}
+        alt="RY2X"
+        class="h-7 w-7 rounded-full object-cover"
+        loading="eager"
+      />
       <span
         class="text-sm font-bold tracking-tighter text-gray-900 dark:text-white"
         >Ry2X.NET</span
