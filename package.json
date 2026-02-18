@@ -15,12 +15,14 @@
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.17.1",
+    "astro-icon": "^1.1.5",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.10.6",
     "@eslint/js": "^10.0.1",
+    "@iconify-json/octicon": "^1.2.21",
     "@typescript-eslint/parser": "^8.55.0",
     "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.1.8",
