@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAllPosts, formatDate } from '../../lib/content';
+import Tag from '../../components/Tag.astro';
 
 export async function getStaticPaths() {
   const posts = await getAllPosts();
@@ -57,9 +58,7 @@ const { Content } = await post.render();
           post.data.tags && post.data.tags.length > 0 && (
             <div class="mt-2 flex flex-wrap gap-2 md:mt-0">
               {post.data.tags.map((tag) => (
-                <span class="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
-                  {tag}
-                </span>
+                <Tag tag={tag} />
               ))}
             </div>
           )
