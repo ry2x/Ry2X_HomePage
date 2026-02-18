@@ -65,42 +65,20 @@ html.dark .hero-card-glow {
 
 #bg-layer {
   background-color: #f7f9fc;
-  background-image:
-    radial-gradient(
-      ellipse 80% 60% at 50% -10%,
-      rgba(125, 211, 252, 0.25) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 60% 40% at 85% 110%,
-      rgba(186, 230, 253, 0.4) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 40% 30% at 15% 100%,
-      rgba(147, 219, 253, 0.35) 0%,
-      transparent 50%
-    );
+  background-image: radial-gradient(
+    ellipse 80% 60% at 50% -10%,
+    rgba(125, 211, 252, 0.25) 0%,
+    transparent 70%
+  );
 }
 
 html.dark #bg-layer {
   background-color: #080808;
-  background-image:
-    radial-gradient(
-      ellipse 70% 50% at 50% -5%,
-      rgba(255, 255, 255, 0.18) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 50% 35% at 85% 110%,
-      rgba(255, 255, 255, 0.18) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 35% 25% at 15% 105%,
-      rgba(255, 255, 255, 0.15) 0%,
-      transparent 50%
-    );
+  background-image: radial-gradient(
+    ellipse 70% 50% at 50% -5%,
+    rgba(255, 255, 255, 0.18) 0%,
+    transparent 70%
+  );
 }
 
 /* Custom styles */
