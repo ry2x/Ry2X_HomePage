@@ -1,7 +1,42 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ── Hero card ── */
+/* ── Slide-fill buttons (hero card) ── */
+.btn-slide {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.btn-slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-101%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.btn-slide:hover::before {
+  transform: translateX(0);
+}
+
+.btn-slide-primary::before {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+html.dark .btn-slide-primary::before {
+  background: rgba(96, 165, 250, 0.2);
+}
+
+.btn-slide-secondary::before {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+html.dark .btn-slide-secondary::before {
+  background: rgba(255, 255, 255, 0.08);
+}
+
 .hero-card {
   background-color: #f8f8f8;
   background-image: none;
