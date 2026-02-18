@@ -9,7 +9,7 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-4 left-1/2 z-[70] w-4/5 -translate-x-1/2 md:w-auto">
+<header class="fixed top-4 left-1/2 z-70 w-4/5 -translate-x-1/2 md:w-auto">
   <div
     class="flex w-full items-center gap-6 rounded-full border border-gray-200 bg-white/80 px-5 py-3 shadow-lg shadow-black/5 backdrop-blur-xl md:w-auto dark:border-white/8 dark:bg-black/70 dark:shadow-black/40"
   >
@@ -21,7 +21,7 @@ const navItems = [
       </div>
       <span
         class="text-sm font-bold tracking-tighter text-gray-900 dark:text-white"
-        >RY2X.DEV</span
+        >Ry2X.NET</span
       >
     </a>
 
@@ -66,7 +66,7 @@ const navItems = [
   <!-- Hamburger button: outside pill to avoid backdrop-blur compositing clip -->
   <button
     id="menu-toggle"
-    class="absolute top-1/2 right-5 flex h-8 w-8 -translate-y-1/2 flex-col items-center justify-center gap-[7px] md:hidden"
+    class="absolute top-1/2 right-5 flex h-8 w-8 -translate-y-1/2 flex-col items-center justify-center gap-1.75 md:hidden"
     aria-label="Toggle menu"
     aria-expanded="false"
   >
@@ -85,7 +85,7 @@ const navItems = [
 <!-- Mobile drawer -->
 <div
   id="mobile-menu"
-  class="fixed inset-0 z-[60] flex flex-col items-center justify-center gap-8 bg-white/95 backdrop-blur-xl transition-all duration-300 md:hidden dark:bg-black/95"
+  class="fixed inset-0 z-60 flex flex-col items-center justify-center gap-8 bg-white/95 backdrop-blur-xl transition-all duration-300 md:hidden dark:bg-black/95"
   style="opacity:0; pointer-events:none;"
 >
   <nav class="flex flex-col items-center gap-6">
