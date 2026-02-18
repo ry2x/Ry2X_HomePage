@@ -16,12 +16,9 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
   <div class="grid grid-cols-1 gap-4 md:auto-rows-[50px] md:grid-cols-4">
     <!-- Hero card — 3col × 4row -->
     <div
-      class="group relative col-span-1 min-h-64 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-3 md:row-span-4 md:min-h-0 dark:border-white/10 dark:bg-zinc-900"
+      class="hero-card group relative col-span-1 min-h-64 overflow-hidden rounded-3xl border border-gray-200 md:col-span-3 md:row-span-4 md:min-h-0 dark:border-white/10"
     >
-      <div
-        class="absolute inset-0 bg-linear-to-br from-blue-600/30 via-purple-600/20 to-transparent"
-      >
-      </div>
+      <div class="hero-card-glow absolute inset-0"></div>
       <div class="relative flex h-full flex-col justify-end p-8">
         <p
           class="mb-1 font-mono text-[10px] tracking-widest text-blue-500 uppercase dark:text-blue-400"
@@ -29,11 +26,11 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
           Developer
         </p>
         <h1 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
-          RY2X
+          Ry2X
         </h1>
         <p class="text-sm text-gray-600 dark:text-gray-400">
-          Building tools for Linux environments. Using Rust for fun.
-          <br />Working with JAVA and Typescript professionally.
+          Developing with Rust for fun. <br />
+          Working with Java and TypeScript at work.
         </p>
         <div class="mt-4 flex gap-2">
           <a
@@ -112,7 +109,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
 
     <!-- Projects section label — 4col × 1row -->
     <div
-      class="col-span-1 flex items-center rounded-2xl border border-gray-100 bg-gray-100 px-5 py-3 md:col-span-4 md:row-span-1 md:py-0 dark:border-white/5 dark:bg-zinc-900/50"
+      class="col-span-1 flex items-center rounded-2xl border border-gray-200 bg-gray-100 px-5 py-3 md:col-span-4 md:row-span-1 md:py-0 dark:border-white/5 dark:bg-zinc-900/50"
     >
       <span
         class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-500"
@@ -135,27 +132,28 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))] transition-opacity group-hover:opacity-80"
       >
       </div>
-      <!-- 3D screenshot -->
-      <div
-        class="pointer-events-none absolute inset-0 flex items-center justify-end"
-        style="perspective: 600px;"
-      >
-        <img
-          src="/assets/home/par_tui.png"
-          alt=""
-          aria-hidden="true"
-          class="w-[72%] origin-right rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.03]"
-          style="transform: rotateY(-22deg) rotateX(6deg) translateX(8%) translateY(4%); opacity: 0.92;"
-        />
-      </div>
-      <div class="relative flex h-full flex-col justify-end p-8">
-        <div class="w-1/2">
+      <div class="relative flex h-full">
+        <!-- Text: left half -->
+        <div class="flex w-1/2 shrink-0 flex-col justify-end p-8">
           <h3 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
             par_TUI
           </h3>
           <p class="text-sm text-gray-600 dark:text-gray-400">
-            Arch Linux update manager <br /> built with ratatui.
+            Arch Linux update manager built with ratatui.
           </p>
+        </div>
+        <!-- Image: right half, 3D -->
+        <div
+          class="relative flex w-1/2 shrink-0 items-center justify-center overflow-visible"
+          style="perspective: 600px;"
+        >
+          <img
+            src="/assets/home/par_tui.png"
+            alt=""
+            aria-hidden="true"
+            class="w-[130%] origin-left rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.03]"
+            style="transform: rotateY(-18deg) rotateX(5deg) translateX(8%); opacity: 0.92;"
+          />
         </div>
       </div>
     </a>
@@ -169,27 +167,28 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))] transition-opacity group-hover:opacity-80"
       >
       </div>
-      <!-- 3D screenshot -->
-      <div
-        class="pointer-events-none absolute inset-0 flex items-center justify-end"
-        style="perspective: 600px;"
-      >
-        <img
-          src="/assets/home/hyprbind.png"
-          alt=""
-          aria-hidden="true"
-          class="w-[72%] origin-right rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.03]"
-          style="transform: rotateY(-22deg) rotateX(6deg) translateX(8%) translateY(4%); opacity: 0.92;"
-        />
-      </div>
-      <div class="relative flex h-full flex-col justify-end p-8">
-        <div class="w-1/2">
+      <div class="relative flex h-full">
+        <!-- Text: left half -->
+        <div class="flex w-1/2 shrink-0 flex-col justify-end p-8">
           <h3 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
             HyprBind
           </h3>
           <p class="text-sm text-gray-600 dark:text-gray-400">
-            Keybinding viewer <br /> for Hyprland using egui.
+            Keybinding viewer for Hyprland using egui.
           </p>
+        </div>
+        <!-- Image: right half, 3D -->
+        <div
+          class="relative flex w-1/2 shrink-0 items-center justify-center overflow-visible"
+          style="perspective: 600px;"
+        >
+          <img
+            src="/assets/home/hyprbind.png"
+            alt=""
+            aria-hidden="true"
+            class="w-[130%] origin-left rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.03]"
+            style="transform: rotateY(-18deg) rotateX(5deg) translateX(8%); opacity: 0.92;"
+          />
         </div>
       </div>
     </a>
@@ -197,7 +196,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
     <!-- Dotfiles — 1col × 4row -->
     <a
       href="/projects/dotfiles"
-      class="group relative col-span-1 min-h-36 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+      class="group relative col-span-1 min-h-36 overflow-hidden rounded-3xl border border-gray-200 bg-black md:row-span-4 dark:border-white/10"
     >
       <!-- Background image -->
       <Image
@@ -205,20 +204,25 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         alt=""
         width={800}
         height={450}
-        class="absolute inset-0 h-full w-full object-cover brightness-90 transition-all duration-700 group-hover:scale-105 group-hover:brightness-100"
+        class="absolute inset-0 h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
         aria-hidden="true"
       />
-      <!-- Overlay: fades out on hover to reveal image -->
+      <!-- Overlay -->
       <div
-        class="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/70 transition-opacity duration-700 group-hover:opacity-20"
+        class="absolute inset-0 bg-linear-to-b from-black/40 via-black/20 to-black/65 transition-opacity duration-700 group-hover:opacity-30"
       >
       </div>
       <div class="relative flex h-full flex-col p-6">
         <span
-          class="mb-auto font-mono text-[10px] tracking-widest text-orange-300 uppercase"
+          class="mb-auto inline-flex w-fit items-center rounded-full border border-orange-300/40 bg-black/30 px-2 pt-1.5 pb-1 font-mono text-[10px] leading-none tracking-widest text-orange-300 uppercase backdrop-blur-sm"
           >Dotfiles</span
         >
-        <h3 class="text-lg font-bold text-white">Arch Linux + Hyprland</h3>
+        <div>
+          <h3 class="text-lg font-bold text-white">Ryprland</h3>
+          <p class="mt-0.5 text-xs text-white/60">
+            My Arch Linux Dotfile using hyprland.
+          </p>
+        </div>
       </div>
     </a>
 

@@ -1,7 +1,33 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ── Page background ── */
+/* ── Hero card ── */
+.hero-card {
+  background-color: #f8f8f8;
+  background-image: none;
+}
+
+html.dark .hero-card {
+  background-color: #0e0e0e;
+  background-image: none;
+}
+
+.hero-card-glow {
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 0%,
+    rgba(125, 211, 252, 0.35) 0%,
+    transparent 70%
+  );
+}
+
+html.dark .hero-card-glow {
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 0%,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+}
+
 #bg-layer {
   background-color: #f7f9fc;
   background-image:
