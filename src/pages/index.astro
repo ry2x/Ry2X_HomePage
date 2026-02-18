@@ -9,10 +9,10 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
   title="Home - RY2X.DEV"
   description="Developer building tools for Linux environments. Rust enthusiast."
 >
-  <div class="grid auto-rows-[50px] grid-cols-1 gap-4 md:grid-cols-4">
+  <div class="grid grid-cols-1 gap-4 md:auto-rows-[50px] md:grid-cols-4">
     <!-- Hero card — 3col × 4row -->
     <div
-      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-3 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+      class="group relative col-span-1 min-h-64 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-3 md:row-span-4 md:min-h-0 dark:border-white/10 dark:bg-zinc-900"
     >
       <div
         class="absolute inset-0 bg-linear-to-br from-blue-600/30 via-purple-600/20 to-transparent"
@@ -27,8 +27,8 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         <h1 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
           RY2X
         </h1>
-        <p class="max-w-xs text-sm text-gray-600 dark:text-gray-400">
-          Building tools for Linux environments. Using Rust for fun. Working with JAVA and Typescript professionally.
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          Building tools for Linux environments. Using Rust for fun.<br/>Working with JAVA and Typescript professionally.
         </p>
         <div class="mt-4 flex gap-2">
           <a
@@ -47,30 +47,29 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
 
     <!-- Quote card — 1col × 4row -->
     <div
-      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+      class="group relative col-span-1 min-h-48 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-4 md:min-h-0 dark:border-white/10 dark:bg-zinc-900"
     >
       <div
         class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,0,0,0.02),transparent)] dark:bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.03),transparent)]"
       >
       </div>
-      <div class="relative flex h-full flex-col justify-center gap-3 p-6">
+      <div class="relative flex h-full flex-col justify-center p-6">
         <span
-          class="font-serif text-6xl leading-none text-black/10 select-none dark:text-white/10"
+          class="-mb-2 font-serif text-4xl leading-none text-black/10 select-none dark:text-white/10"
           >"</span
         >
         <p
           class="text-center font-serif text-base leading-relaxed text-gray-800 italic dark:text-white/80"
         >
-          Living is worthwhile if one can contribute in some small way to this
-          endless chain of progress.
+          Living is worthwhile if one can contribute in some small way to this endless chain of progress.
         </p>
         <div>
           <span
-            class="block text-right font-serif text-6xl leading-none text-black/10 select-none dark:text-white/10"
+            class="-mt-2 -mb-1 block text-right font-serif text-4xl leading-none text-black/10 select-none dark:text-white/10"
             >"</span
           >
           <p
-            class="text-center font-mono text-[10px] text-gray-400 dark:text-gray-600"
+            class="text-center font-mono text-[10px] text-gray-500 dark:text-gray-400"
           >
             — Paul A.M. Dirac
           </p>
@@ -80,7 +79,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
 
     <!-- Projects section label — 4col × 1row -->
     <div
-      class="col-span-1 flex items-center rounded-2xl border border-gray-100 bg-gray-100 px-5 md:col-span-4 md:row-span-1 dark:border-white/5 dark:bg-zinc-900/50"
+      class="col-span-1 flex items-center rounded-2xl border border-gray-100 bg-gray-100 px-5 py-3 md:col-span-4 md:row-span-1 md:py-0 dark:border-white/5 dark:bg-zinc-900/50"
     >
       <span
         class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-500"
@@ -97,7 +96,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
     <!-- par_TUI — 2col × 4row -->
     <a
       href="/projects/par_tui"
-      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+      class="group relative col-span-1 min-h-52 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
     >
       <div
         class="absolute inset-0 bg-linear-to-br from-blue-600/20 to-purple-600/20 transition-transform duration-500 group-hover:scale-110"
@@ -124,7 +123,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
     <!-- HyprBind — 2col × 4row -->
     <a
       href="/projects/hyprbind"
-      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+      class="group relative col-span-1 min-h-36 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
     >
       <div
         class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))] transition-opacity group-hover:opacity-80"
@@ -143,7 +142,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
     <!-- Dotfiles — 1col × 4row -->
     <a
       href="/projects/dotfiles"
-      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+      class="group relative col-span-1 min-h-36 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
     >
       <div
         class="absolute inset-0 bg-linear-to-b from-emerald-500/10 to-transparent"
@@ -162,7 +161,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
 
     <!-- COMMIT filler — 2col × 4row -->
     <div
-      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+      class="group relative col-span-1 min-h-36 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
     >
       <!-- light mode dots -->
       <div
@@ -190,34 +189,64 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
       </div>
     </div>
 
-    <!-- Zenn Blog — 1col × 4row -->
-    <a
-      href="https://zenn.dev"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
-    >
-      <div
-        class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.1),transparent)] transition-opacity group-hover:opacity-80"
+    <!-- GitHub + Zenn — 1col × 4row (desktop), 2col split (mobile) -->
+    <div class="col-span-1 grid grid-cols-2 gap-4 md:col-span-1 md:grid-cols-1 md:row-span-4">
+
+      <!-- GitHub -->
+      <a
+        href="https://github.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group relative min-h-24 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-2 dark:border-white/10 dark:bg-zinc-900"
       >
-      </div>
-      <div
-        class="relative flex h-full flex-col items-center justify-center gap-2 p-6"
+        <div
+          class="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(0,0,0,0.04),transparent)] transition-opacity group-hover:opacity-80 dark:bg-[radial-gradient(circle_at_50%_100%,rgba(255,255,255,0.05),transparent)]"
+        >
+        </div>
+        <div
+          class="relative flex h-full flex-col items-center justify-center gap-2 p-6"
+        >
+          <span
+            class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-600"
+            >External</span
+          >
+          <span
+            class="text-base font-bold text-gray-400 transition-colors group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+            >GitHub ↗</span
+          >
+        </div>
+      </a>
+
+      <!-- Zenn Blog -->
+      <a
+        href="https://zenn.dev"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group relative min-h-24 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-2 dark:border-white/10 dark:bg-zinc-900"
       >
-        <span
-          class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-600"
-          >External</span
+        <div
+          class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.1),transparent)] transition-opacity group-hover:opacity-80"
         >
-        <span
-          class="text-base font-bold text-gray-400 transition-colors group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-          >Zenn Blog ↗</span
+        </div>
+        <div
+          class="relative flex h-full flex-col items-center justify-center gap-2 p-6"
         >
-      </div>
-    </a>
+          <span
+            class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-600"
+            >External</span
+          >
+          <span
+            class="text-base font-bold text-gray-400 transition-colors group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+            >Zenn Blog ↗</span
+          >
+        </div>
+      </a>
+
+    </div>
 
     <!-- Recent Blog section label — 4col × 1row -->
     <div
-      class="col-span-1 flex items-center rounded-2xl border border-gray-100 bg-gray-100 px-5 md:col-span-4 md:row-span-1 dark:border-white/5 dark:bg-zinc-900/50"
+      class="col-span-1 flex items-center rounded-2xl border border-gray-100 bg-gray-100 px-5 py-3 md:col-span-4 md:row-span-1 md:py-0 dark:border-white/5 dark:bg-zinc-900/50"
     >
       <span
         class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-500"
@@ -236,7 +265,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
       recentPosts.map((post) => (
         <a
           href={`/blog/${post.slug}`}
-          class="group relative col-span-1 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-3 dark:border-white/10 dark:bg-zinc-900"
+          class="group relative col-span-1 min-h-40 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-3 dark:border-white/10 dark:bg-zinc-900"
         >
           <div class="absolute inset-0 bg-black/2 transition-colors group-hover:bg-black/4 dark:bg-white/2 dark:group-hover:bg-white/4" />
           <div class="relative flex h-full flex-col justify-center p-6">
