@@ -9,9 +9,9 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-4 left-1/2 z-50 -translate-x-1/2">
+<header class="fixed top-4 left-1/2 z-[70] w-4/5 -translate-x-1/2 md:w-auto">
   <div
-    class="flex items-center gap-6 rounded-full border border-gray-200 bg-white/80 px-5 py-3 shadow-lg shadow-black/5 backdrop-blur-xl dark:border-white/10 dark:bg-gray-950/80 dark:shadow-black/20"
+    class="flex w-full items-center gap-6 rounded-full border border-gray-200 bg-white/80 px-5 py-3 shadow-lg shadow-black/5 backdrop-blur-xl dark:border-white/10 dark:bg-gray-950/80 dark:shadow-black/20 md:w-auto"
   >
     <!-- Logo -->
     <a href="/" class="flex shrink-0 items-center gap-2">
@@ -28,7 +28,7 @@ const navItems = [
     <!-- Divider -->
     <div class="h-4 w-px bg-gray-200 dark:bg-white/10"></div>
 
-    <!-- Nav -->
+    <!-- Nav (desktop) -->
     <nav class="hidden items-center gap-6 md:flex">
       {
         navItems.map((item) => (
@@ -42,18 +42,93 @@ const navItems = [
       }
     </nav>
 
-    <!-- Divider -->
+    <!-- Divider (desktop) -->
     <div class="hidden h-4 w-px bg-gray-200 md:block dark:bg-white/10"></div>
+
+    <!-- Spacer (mobile only) — keeps DarkModeToggle left of where hamburger will be -->
+    <div class="flex-1 md:hidden"></div>
 
     <!-- Actions -->
     <div class="flex items-center gap-3">
       <DarkModeToggle />
       <a
         href="mailto:contact@example.com"
-        class="rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-xs font-medium tracking-widest text-gray-700 uppercase transition-all hover:bg-gray-100 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+        class="hidden whitespace-nowrap rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-xs font-medium tracking-widest text-gray-700 uppercase transition-all hover:bg-gray-100 md:inline-flex dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
       >
         Contact ↗
       </a>
+
+      <!-- Placeholder to reserve space for the absolute hamburger button (mobile only) -->
+      <div class="h-8 w-8 md:hidden"></div>
     </div>
   </div>
+
+  <!-- Hamburger button: outside pill to avoid backdrop-blur compositing clip -->
+  <button
+    id="menu-toggle"
+    class="absolute top-1/2 right-5 flex h-8 w-8 -translate-y-1/2 flex-col items-center justify-center gap-[7px] md:hidden"
+    aria-label="Toggle menu"
+    aria-expanded="false"
+  >
+    <span class="hamburger-line block h-px w-5 bg-gray-500 transition-all duration-300 dark:bg-gray-400"></span>
+    <span class="hamburger-line block h-px w-5 bg-gray-500 transition-all duration-300 dark:bg-gray-400"></span>
+    <span class="hamburger-line block h-px w-5 bg-gray-500 transition-all duration-300 dark:bg-gray-400"></span>
+  </button>
 </header>
+
+<!-- Mobile drawer -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-[60] flex flex-col items-center justify-center gap-8 bg-white/95 backdrop-blur-xl transition-all duration-300 md:hidden dark:bg-gray-950/95"
+  style="opacity:0; pointer-events:none;"
+>
+  <nav class="flex flex-col items-center gap-6">
+    {
+      navItems.map((item) => (
+        <a
+          href={item.href}
+          class="text-xl font-medium tracking-widest text-gray-700 uppercase transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+        >
+          {item.name}
+        </a>
+      ))
+    }
+    <a
+      href="mailto:contact@example.com"
+      class="mt-4 rounded-full border border-gray-200 bg-gray-50 px-6 py-2 text-sm font-medium tracking-widest text-gray-700 uppercase transition-all hover:bg-gray-100 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+    >
+      Contact ↗
+    </a>
+  </nav>
+</div>
+
+<script>
+  const toggle = document.getElementById('menu-toggle')!;
+  const menu = document.getElementById('mobile-menu')!;
+  let open = false;
+
+  function setMenu(state: boolean) {
+    open = state;
+    menu.style.opacity = open ? '1' : '0';
+    menu.style.pointerEvents = open ? 'auto' : 'none';
+    document.body.style.overflow = open ? 'hidden' : '';
+    toggle.setAttribute('aria-expanded', String(open));
+
+    const lines = toggle.querySelectorAll<HTMLElement>('.hamburger-line');
+    if (open) {
+      lines[0].style.transform = 'translateY(8px) rotate(45deg)';
+      lines[1].style.opacity = '0';
+      lines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+    } else {
+      lines[0].style.transform = '';
+      lines[1].style.opacity = '';
+      lines[2].style.transform = '';
+    }
+  }
+
+  toggle.addEventListener('click', () => setMenu(!open));
+
+  menu.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => setMenu(false));
+  });
+</script>
