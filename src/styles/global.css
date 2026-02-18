@@ -49,8 +49,8 @@ html.dark .hero-card {
 
 .hero-card-glow {
   background: radial-gradient(
-    ellipse 60% 50% at 50% 0%,
-    rgba(125, 211, 252, 0.35) 0%,
+    ellipse 60% 35% at 50% 0%,
+    rgba(125, 211, 252, 0.2) 0%,
     transparent 70%
   );
 }
