@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
 import { getAllPosts } from '../lib/content';
+import dotfileImg from '/public/assets/home/dotfile.avif';
+import diracImg from '/public/assets/home/Paul_Dirac_1933.jpg';
 
 const recentPosts = (await getAllPosts()).slice(0, 4);
 ---
@@ -48,8 +51,17 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
 
     <!-- Quote card — 1col × 4row -->
     <div
-      class="group relative col-span-1 min-h-48 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-4 md:min-h-0 dark:border-white/10 dark:bg-zinc-900"
+      id="quote-card"
+      class="group relative col-span-1 min-h-48 cursor-pointer overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-4 md:min-h-0 dark:border-white/10 dark:bg-zinc-900"
     >
+      <!-- Dirac watermark: hidden by default, fades in on hover -->
+      <Image
+        src={diracImg}
+        alt=""
+        width={300}
+        class="pointer-events-none absolute inset-0 h-full w-full object-cover object-top opacity-0 transition-opacity duration-700 select-none group-hover:opacity-10 dark:group-hover:opacity-15"
+        aria-hidden="true"
+      />
       <div
         class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,0,0,0.02),transparent)] dark:bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.03),transparent)]"
       >
@@ -60,7 +72,10 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
           >"</span
         >
         <p
-          class="text-center font-serif text-base leading-relaxed text-gray-800 italic dark:text-white/80"
+          id="quote-text"
+          class="text-center font-serif text-base leading-relaxed text-gray-800 italic transition-opacity duration-300 dark:text-white/80"
+          data-en="Living is worthwhile if one can contribute in some small way to this endless chain of progress."
+          data-ja="終わりなき進歩の連鎖に、たとえ小さな形であれ貢献できるなら、生きる価値はある"
         >
           Living is worthwhile if one can contribute in some small way to this
           endless chain of progress.
@@ -78,6 +93,21 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         </div>
       </div>
     </div>
+
+    <script>
+      const card = document.getElementById('quote-card')!;
+      const text = document.getElementById('quote-text')!;
+      let isJa = false;
+
+      card.addEventListener('click', () => {
+        isJa = !isJa;
+        text.style.opacity = '0';
+        setTimeout(() => {
+          text.textContent = isJa ? text.dataset.ja! : text.dataset.en!;
+          text.style.opacity = '1';
+        }, 300);
+      });
+    </script>
 
     <!-- Projects section label — 4col × 1row -->
     <div
@@ -146,18 +176,26 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
       href="/projects/dotfiles"
       class="group relative col-span-1 min-h-36 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
     >
+      <!-- Background image -->
+      <Image
+        src={dotfileImg}
+        alt=""
+        width={800}
+        height={450}
+        class="absolute inset-0 h-full w-full object-cover brightness-90 transition-all duration-700 group-hover:scale-105 group-hover:brightness-100"
+        aria-hidden="true"
+      />
+      <!-- Overlay: fades out on hover to reveal image -->
       <div
-        class="absolute inset-0 bg-linear-to-b from-emerald-500/10 to-transparent"
+        class="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/70 transition-opacity duration-700 group-hover:opacity-20"
       >
       </div>
       <div class="relative flex h-full flex-col p-6">
         <span
-          class="mb-auto font-mono text-[10px] tracking-widest text-emerald-500 uppercase dark:text-emerald-400"
+          class="mb-auto font-mono text-[10px] tracking-widest text-orange-300 uppercase"
           >Dotfiles</span
         >
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white">
-          Arch Linux + Hyprland
-        </h3>
+        <h3 class="text-lg font-bold text-white">Arch Linux + Hyprland</h3>
       </div>
     </a>
 
@@ -203,7 +241,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         class="group relative min-h-24 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-2 dark:border-white/10 dark:bg-zinc-900"
       >
         <div
-          class="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(0,0,0,0.04),transparent)] transition-opacity group-hover:opacity-80 dark:bg-[radial-gradient(circle_at_50%_100%,rgba(255,255,255,0.05),transparent)]"
+          class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(236,72,153,0.12),transparent)] transition-opacity group-hover:opacity-80 dark:bg-[radial-gradient(circle_at_50%_0%,rgba(236,72,153,0.18),transparent)]"
         >
         </div>
         <div
