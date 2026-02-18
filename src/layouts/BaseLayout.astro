@@ -8,9 +8,11 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  canonicalURL?: string;
+  type?: 'website' | 'article';
 }
 
-const { title, description, image } = Astro.props;
+const { title, description, image, canonicalURL, type } = Astro.props;
 ---
 
 <!doctype html>
@@ -18,7 +20,7 @@ const { title, description, image } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <SEO title={title} description={description} image={image} />
+    <SEO title={title} description={description} image={image} canonicalURL={canonicalURL} type={type} />
     <script is:inline>
       const theme =
         localStorage.getItem('theme') ||

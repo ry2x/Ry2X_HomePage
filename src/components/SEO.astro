@@ -4,14 +4,18 @@ interface Props {
   description?: string;
   image?: string;
   canonicalURL?: string;
+  type?: 'website' | 'article';
 }
 
 const {
-  title = 'My HomePage',
-  description = 'Welcome to my personal website',
-  image = '/og-image.jpg',
+  title = 'Ry2X.NET',
+  description = 'Developer building tools for Linux environments. Rust enthusiast.',
+  image = '/icon-192x192.png',
   canonicalURL = Astro.url.href,
+  type = 'website',
 } = Astro.props;
+
+const ogImage = new URL(image, Astro.site).href;
 ---
 
 <!-- Primary Meta Tags -->
@@ -20,26 +24,29 @@ const {
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.site)} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content="ja_JP" />
+<meta property="og:site_name" content="Ry2X.NET" />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={canonicalURL} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.site)} />
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@_ry2x_" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
 
 <!-- Favicons -->
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180-precomposed.png" />
+<link rel="icon" type="image/png" href="/icon-192x192.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/icon-16x16.png" />
 <link rel="manifest" href="/site.webmanifest" />
 
 <!-- Generator -->
