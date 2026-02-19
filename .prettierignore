@@ -105,3 +105,6 @@ dist
 
 #readme files
 README.md
+
+# pnpm lock
+pnpm-lock.yaml

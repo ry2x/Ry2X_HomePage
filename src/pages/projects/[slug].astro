@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAllProjects, formatDate } from '../../lib/content';
@@ -14,12 +15,13 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await project.render();
+const cover = project.data.cover;
 ---
 
 <BaseLayout
   title={`${project.data.title} - Projects`}
   description={project.data.description}
-  image={project.data.cover}
+  image={cover?.src}
 >
   <article>
     <!-- Back to Projects -->
@@ -39,9 +41,9 @@ const { Content } = await project.render();
     <!-- Project Header -->
     <header class="mb-8">
       {
-        project.data.cover && (
-          <img
-            src={project.data.cover}
+        cover && (
+          <Image
+            src={cover}
             alt={project.data.title}
             class="mb-6 h-64 w-full rounded-lg object-cover md:h-80"
           />
