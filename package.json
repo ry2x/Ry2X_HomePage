@@ -11,6 +11,9 @@
     "deploy": "wrangler pages deploy ./dist",
     "astro": "astro"
   },
+  "pnpm": {
+    "ignoredBuiltDependencies": ["esbuild", "sharp"]
+  },
   "devDependencies": {
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/sitemap": "^3.7.0",
