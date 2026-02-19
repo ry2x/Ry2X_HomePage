@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<BaseLayout title="404 - Ry2X.NET" description="Page not found">
+  <div
+    class="flex min-h-[70vh] flex-col items-center justify-center text-center"
+  >
+    <p
+      class="mb-3 font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-600"
+    >
+      Error
+    </p>
+    <h1
+      class="mb-4 font-mono text-8xl font-black text-gray-900/10 select-none dark:text-white/10"
+    >
+      404
+    </h1>
+    <p class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+      Page not found
+    </p>
+    <p class="mb-8 text-sm text-gray-500 dark:text-gray-400">
+      The page you're looking for doesn't exist or has been moved.
+    </p>
+    <a
+      href="/"
+      class="btn-slide btn-slide-primary rounded-full border border-blue-400/40 px-5 py-2 font-mono text-xs text-blue-500 dark:text-blue-400"
+    >
+      <Icon name="octicon:arrow-left-16" class="inline" /> Back to Home
+    </a>
+  </div>
+</BaseLayout>

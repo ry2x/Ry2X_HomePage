@@ -1,95 +1,63 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAllProjects, formatDate } from '../../lib/content';
+import Tag from '../../components/Tag.astro';
 
 const projects = await getAllProjects();
 ---
 
 <BaseLayout
-  title="Projects - My HomePage"
-  description="Explore my portfolio of web development projects and experiments"
+  title="Projects - Ry2X.NET"
+  description="Open-source tools and experiments I've built, mostly around Linux and Rust."
 >
-  <div class="mb-8">
-    <h1 class="mb-4 text-3xl font-bold text-gray-900">Projects</h1>
-    <p class="text-gray-600">
-      Here's a collection of projects I've worked on. Each one represents a
-      learning experience and a step forward in my development journey.
-    </p>
+  <!-- Page header -->
+  <div class="mb-6 flex items-center gap-4">
+    <h1
+      class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-500"
+    >
+      Projects
+    </h1>
+    <div class="h-px flex-1 bg-gray-200 dark:bg-white/5"></div>
   </div>
 
   {
     projects.length > 0 ? (
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
         {projects.map((project) => (
-          <article class="overflow-hidden rounded-lg border border-gray-200 transition-shadow hover:shadow-lg">
-            {project.data.cover && (
-              <img
-                src={project.data.cover}
-                alt={project.data.title}
-                class="h-48 w-full object-cover"
-              />
-            )}
-
-            <div class="p-6">
-              <div class="mb-4">
-                <h2 class="mb-2 text-xl font-semibold text-gray-900">
-                  <a
-                    href={`/projects/${project.slug}`}
-                    class="transition-colors hover:text-blue-600"
-                  >
-                    {project.data.title}
-                  </a>
-                </h2>
-
-                {project.data.date && (
-                  <time class="text-sm text-gray-500">
-                    {formatDate(project.data.date)}
-                  </time>
-                )}
-              </div>
-
-              <p class="mb-4 text-gray-600">{project.data.description}</p>
-
+          <a
+            href={`/projects/${project.slug}`}
+            class="hero-card group relative overflow-hidden rounded-3xl border border-gray-200 p-6 transition-shadow hover:shadow-sm dark:border-white/10"
+          >
+            <div class="hero-card-glow pointer-events-none absolute inset-0" />
+            <div class="relative">
+              {project.data.date && (
+                <time class="mb-3 block font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-600">
+                  {formatDate(project.data.date)}
+                </time>
+              )}
+              <h2 class="mb-2 text-lg font-bold text-gray-900 dark:text-white">
+                {project.data.title}
+              </h2>
+              <p class="mb-4 line-clamp-2 text-sm text-gray-500 dark:text-gray-400">
+                {project.data.description}
+              </p>
               {project.data.tags && project.data.tags.length > 0 && (
-                <div class="mb-4 flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-1.5">
                   {project.data.tags.map((tag) => (
-                    <span class="rounded bg-gray-100 px-2 py-1 text-xs text-gray-700">
-                      {tag}
-                    </span>
+                    <Tag tag={tag} />
                   ))}
                 </div>
               )}
-
-              <a
-                href={`/projects/${project.slug}`}
-                class="text-sm font-medium text-blue-600 hover:text-blue-800"
-              >
-                Learn more →
-              </a>
             </div>
-          </article>
+          </a>
         ))}
       </div>
     ) : (
-      <div class="py-12 text-center">
-        <div class="mb-4 text-gray-500">
-          <p class="mb-2 text-lg">No projects yet!</p>
-          <p>Projects will appear here once I start adding them.</p>
-        </div>
-        <div class="text-sm text-gray-400">
-          <p>
-            Add projects to:{' '}
-            <code class="rounded bg-gray-100 px-2 py-1">
-              src/content/projects/
-            </code>
-          </p>
-          <p>
-            See content guidelines:{' '}
-            <code class="rounded bg-gray-100 px-2 py-1">
-              src/content/README.md
-            </code>
-          </p>
-        </div>
+      <div class="hero-card relative flex min-h-64 items-center justify-center overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10">
+        <div class="hero-card-glow pointer-events-none absolute inset-0" />
+        <p class="relative text-sm text-gray-400 dark:text-gray-600">
+          No projects yet.
+        </p>
       </div>
     )
   }

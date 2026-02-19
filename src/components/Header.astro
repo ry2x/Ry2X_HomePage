@@ -1,41 +1,164 @@
 ---
-// Header component
+// Header component - Dynamic Island style
+import { Image } from 'astro:assets';
+import DarkModeToggle from './DarkModeToggle.astro';
+import profileImg from '../assets/home/profile.png';
+
+const navItems = [
+  { name: 'Home', href: '/' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Blog', href: '/blog' },
+];
 ---
 
-<header class="border-b border-gray-200">
-  <div class="container mx-auto px-4 py-6">
-    <nav class="flex items-center justify-between">
-      <div>
-        <a href="/" class="text-xl font-bold text-gray-900 hover:text-gray-700">
-          My HomePage
-        </a>
-      </div>
-      <ul class="flex space-x-6">
-        <li>
+<header class="fixed top-4 left-1/2 z-70 w-4/5 -translate-x-1/2 md:w-auto">
+  <div
+    class="flex w-full items-center gap-6 rounded-full border border-gray-200 bg-white/80 px-5 py-3 shadow-lg shadow-black/5 backdrop-blur-xl md:w-auto dark:border-white/8 dark:bg-black/70 dark:shadow-black/40"
+  >
+    <!-- Logo -->
+    <a href="/" class="flex shrink-0 items-center gap-2">
+      <Image
+        src={profileImg}
+        alt="RY2X"
+        class="h-7 w-7 rounded-full object-cover"
+        loading="eager"
+      />
+      <span
+        class="text-sm font-bold tracking-tighter text-gray-900 dark:text-white"
+        >Ry2X.NET</span
+      >
+    </a>
+
+    <!-- Divider -->
+    <div class="h-4 w-px bg-gray-200 dark:bg-white/10"></div>
+
+    <!-- Nav (desktop) -->
+    <nav class="hidden items-center gap-6 md:flex">
+      {
+        navItems.map((item) => (
           <a
-            href="/"
-            class="text-gray-600 transition-colors hover:text-gray-900"
+            href={item.href}
+            class="text-xs font-medium tracking-widest text-gray-500 uppercase transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
           >
-            Home
+            {item.name}
           </a>
-        </li>
-        <li>
-          <a
-            href="/projects"
-            class="text-gray-600 transition-colors hover:text-gray-900"
-          >
-            Projects
-          </a>
-        </li>
-        <li>
-          <a
-            href="/blog"
-            class="text-gray-600 transition-colors hover:text-gray-900"
-          >
-            Blog
-          </a>
-        </li>
-      </ul>
+        ))
+      }
     </nav>
+
+    <!-- Divider (desktop) -->
+    <div class="hidden h-4 w-px bg-gray-200 md:block dark:bg-white/10"></div>
+
+    <!-- Spacer (mobile only) — keeps DarkModeToggle left of where hamburger will be -->
+    <div class="flex-1 md:hidden"></div>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-3">
+      <DarkModeToggle />
+      <a
+        href="mailto:contact@example.com"
+        class="hidden rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-xs font-medium tracking-widest whitespace-nowrap text-gray-700 uppercase transition-all hover:bg-gray-100 md:inline-flex dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+      >
+        Contact ↗
+      </a>
+
+      <!-- Placeholder to reserve space for the absolute hamburger button (mobile only) -->
+      <div class="h-8 w-8 md:hidden"></div>
+    </div>
   </div>
+
+  <!-- Hamburger button: outside pill to avoid backdrop-blur compositing clip -->
+  <button
+    id="menu-toggle"
+    class="absolute top-1/2 right-5 flex h-8 w-8 -translate-y-1/2 flex-col items-center justify-center gap-1.75 md:hidden"
+    aria-label="Toggle menu"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+  >
+    <span
+      class="hamburger-line block h-px w-5 bg-gray-500 transition-all duration-300 dark:bg-gray-400"
+    ></span>
+    <span
+      class="hamburger-line block h-px w-5 bg-gray-500 transition-all duration-300 dark:bg-gray-400"
+    ></span>
+    <span
+      class="hamburger-line block h-px w-5 bg-gray-500 transition-all duration-300 dark:bg-gray-400"
+    ></span>
+  </button>
 </header>
+
+<!-- Mobile drawer -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-60 flex flex-col items-center justify-center gap-8 bg-white/95 backdrop-blur-xl transition-all duration-300 md:hidden dark:bg-black/95"
+  style="opacity:0; pointer-events:none;"
+  aria-hidden="true"
+>
+  <nav class="flex flex-col items-center gap-6">
+    {
+      navItems.map((item) => (
+        <a
+          href={item.href}
+          class="text-xl font-medium tracking-widest text-gray-700 uppercase transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+        >
+          {item.name}
+        </a>
+      ))
+    }
+    <a
+      href="mailto:contact@example.com"
+      class="mt-4 rounded-full border border-gray-200 bg-gray-50 px-6 py-2 text-sm font-medium tracking-widest text-gray-700 uppercase transition-all hover:bg-gray-100 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+    >
+      Contact ↗
+    </a>
+  </nav>
+</div>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  if (toggle && menu) {
+    const btn = toggle;
+    const drawer = menu;
+    let open = false;
+
+    function applyMenu() {
+      drawer.style.opacity = open ? '1' : '0';
+      drawer.style.pointerEvents = open ? 'auto' : 'none';
+      drawer.setAttribute('aria-hidden', String(!open));
+      document.body.style.overflow = open ? 'hidden' : '';
+      btn.setAttribute('aria-expanded', String(open));
+
+      const lines = btn.getElementsByTagName('span');
+      if (open) {
+        lines[0].style.transform = 'translateY(8px) rotate(45deg)';
+        lines[1].style.opacity = '0';
+        lines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+      } else {
+        lines[0].style.transform = '';
+        lines[1].style.opacity = '';
+        lines[2].style.transform = '';
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      open = !open;
+      applyMenu();
+    });
+
+    drawer.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        open = false;
+        applyMenu();
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && open) {
+        open = false;
+        applyMenu();
+      }
+    });
+  }
+</script>

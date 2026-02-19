@@ -1,154 +1,456 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getAllPosts, getAllProjects } from '../lib/content';
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import { getAllPosts } from '../lib/content';
+import Tag from '../components/Tag.astro';
 
-// Get recent posts and projects for the homepage
-const recentPosts = (await getAllPosts()).slice(0, 3);
-const recentProjects = (await getAllProjects()).slice(0, 3);
+import dotfileImg from '../assets/home/dotfile.avif';
+import diracImg from '../assets/home/Paul_Dirac_1933.jpg';
+import profileImg from '../assets/home/profile.png';
+import partuiImg from '../assets/home/par_tui.png';
+import hyprbindImg from '../assets/home/hyprbind.png';
+
+const recentPosts = (await getAllPosts()).slice(0, 4);
+
+const heroDesc = {
+  en: 'Developing with Rust for fun. <br />Working with Java and TypeScript at work.',
+  ja: '趣味でRustを使ってます。<br />TypeScriptとかJavaを使って働いてます。',
+};
+
+const diracQuote = {
+  en: 'Living is worthwhile if one can contribute in some small way to this endless chain of progress.',
+  ja: '終わりなき進歩の連鎖に、たとえ小さな形であれ貢献できるなら、生きる価値はある',
+  author: 'Paul A.M. Dirac',
+};
 ---
 
 <BaseLayout
-  title="Home - My HomePage"
-  description="Welcome to my personal website showcasing my projects and thoughts"
+  title="Home - Ry2X.NET"
+  description="Developer building tools for Linux environments. Rust enthusiast."
 >
-  <!-- Hero Section -->
-  <section class="mb-12 py-12 text-center">
-    <h1 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">
-      Welcome to My HomePage
-    </h1>
-    <p class="mx-auto max-w-2xl text-xl leading-relaxed text-gray-600">
-      I'm a developer passionate about creating amazing web experiences. Explore
-      my projects and read about my journey in tech.
-    </p>
-    <div class="mt-8 space-x-4">
+  <div class="grid grid-cols-1 gap-4 md:auto-rows-[50px] md:grid-cols-4">
+    <!-- Hero card — 3col × 4row -->
+    <div
+      id="hero-card"
+      class="hero-card group relative col-span-1 min-h-64 cursor-pointer overflow-hidden rounded-3xl border border-gray-200 md:col-span-3 md:row-span-4 md:min-h-0 dark:border-white/10"
+      role="button"
+      tabindex="0"
+    >
+      <div class="hero-card-glow absolute inset-0"></div>
+      <!-- Profile image: hidden by default, fades in on hover -->
+      <Image
+        src={profileImg}
+        alt=""
+        aria-hidden="true"
+        class="pointer-events-none absolute right-0 bottom-0 h-4/5 w-auto object-contain object-bottom opacity-0 transition-opacity duration-700 select-none group-hover:opacity-20 dark:group-hover:opacity-15"
+        loading="eager"
+      />
+      <div class="relative flex h-full flex-col justify-end p-8">
+        <p
+          class="mb-1 font-mono text-[12px] tracking-widest text-blue-500 uppercase dark:text-blue-400"
+        >
+          Developer
+        </p>
+        <h1 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
+          Ry2X
+        </h1>
+        <p
+          id="hero-desc"
+          class="text-sm text-gray-600 transition-opacity duration-300 dark:text-gray-400"
+          data-en={heroDesc.en}
+          data-ja={heroDesc.ja}
+          set:html={heroDesc.ja}
+        />
+        <div class="mt-4 flex gap-2">
+          <a
+            href="/projects"
+            class="btn-slide btn-slide-primary rounded-full border border-blue-400/40 px-4 py-1.5 font-mono text-xs text-blue-500 transition-colors dark:text-blue-400"
+            >PROJECTS <Icon
+              name="octicon:arrow-right-16"
+              class="inline-block"
+            />
+          </a>
+          <a
+            href="/blog"
+            class="btn-slide btn-slide-secondary rounded-full border border-gray-300 px-4 py-1.5 font-mono text-xs text-gray-500 transition-colors hover:text-gray-800 dark:border-white/25 dark:text-gray-400 dark:hover:text-gray-200"
+            >BLOG <Icon name="octicon:arrow-right-16" class="inline-block" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const heroCard = document.getElementById('hero-card');
+      const heroDesc = document.getElementById('hero-desc');
+
+      if (heroCard && heroDesc) {
+        let isJa = true;
+
+        heroCard.addEventListener('click', (e) => {
+          if (e.target instanceof Element && e.target.closest('a')) return;
+          isJa = !isJa;
+          heroDesc.style.opacity = '0';
+          setTimeout(() => {
+            const text = isJa ? heroDesc.dataset.ja : heroDesc.dataset.en;
+            if (typeof text !== 'string') return;
+            heroDesc.innerHTML = text.replace('\\n', '<br />');
+            heroDesc.style.opacity = '1';
+          }, 300);
+        });
+
+        heroCard.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            heroCard.click();
+          }
+        });
+      }
+    </script>
+
+    <!-- Quote card — 1col × 4row -->
+    <div
+      id="quote-card"
+      class="hero-card group relative col-span-1 min-h-48 cursor-pointer overflow-hidden rounded-3xl border border-gray-200 md:row-span-4 md:min-h-0 dark:border-white/10"
+      role="button"
+      tabindex="0"
+    >
+      <!-- Dirac watermark: hidden by default, fades in on hover -->
+      <Image
+        src={diracImg}
+        alt=""
+        width={300}
+        class="pointer-events-none absolute inset-0 h-full w-full object-cover object-top opacity-0 transition-opacity duration-700 select-none group-hover:opacity-10 dark:group-hover:opacity-15"
+        aria-hidden="true"
+        loading="eager"
+      />
+      <div class="hero-card-glow absolute inset-0"></div>
+      <div class="relative flex h-full flex-col justify-center p-6">
+        <span
+          class="-mb-2 font-serif text-4xl leading-none text-black/10 select-none dark:text-white/10"
+          >"</span
+        >
+        <p
+          id="quote-text"
+          class="text-center font-serif text-base leading-relaxed text-gray-800 italic transition-opacity duration-300 dark:text-white/80"
+          data-en={diracQuote.en}
+          data-ja={diracQuote.ja}
+        >
+          {diracQuote.ja}
+        </p>
+        <div>
+          <span
+            class="-mt-2 -mb-1 block text-right font-serif text-4xl leading-none text-black/10 select-none dark:text-white/10"
+            >"</span
+          >
+          <p
+            class="text-center font-mono text-[10px] text-gray-500 dark:text-gray-400"
+          >
+            — {diracQuote.author}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const card = document.getElementById('quote-card');
+      const text = document.getElementById('quote-text');
+
+      if (card && text) {
+        let isJa = true;
+
+        const toggle = () => {
+          isJa = !isJa;
+          text.style.opacity = '0';
+          setTimeout(() => {
+            const jaText = text.dataset.ja;
+            const enText = text.dataset.en;
+            text.textContent = isJa
+              ? jaText || enText || text.textContent
+              : enText || jaText || text.textContent;
+            text.style.opacity = '1';
+          }, 300);
+        };
+
+        card.addEventListener('click', toggle);
+
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle();
+          }
+        });
+      }
+    </script>
+
+    <!-- Projects section label — 4col × 1row -->
+    <div
+      class="col-span-1 flex items-center rounded-2xl border border-gray-200 bg-gray-100 px-5 py-3 md:col-span-4 md:row-span-1 md:py-0 dark:border-white/5 dark:bg-zinc-900/50"
+    >
+      <span
+        class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-500"
+        >Projects</span
+      >
+      <div class="mx-4 h-px flex-1 bg-gray-200 dark:bg-white/5"></div>
       <a
         href="/projects"
-        class="rounded-md bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
+        class="font-mono text-[10px] text-gray-400 transition-colors hover:text-gray-900 dark:text-gray-500 dark:hover:text-white"
+        >View all →</a
       >
-        View Projects
-      </a>
+    </div>
+
+    <!-- par_TUI — 2col × 4row -->
+    <a
+      href="/projects/par_tui"
+      class="group relative col-span-1 min-h-52 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+    >
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))] transition-opacity group-hover:opacity-80"
+      >
+      </div>
+      <div class="relative flex h-full">
+        <!-- Text: left half -->
+        <div class="flex w-1/2 shrink-0 flex-col justify-end p-8">
+          <h3 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
+            par_TUI
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Arch Linux update manager built with ratatui.
+          </p>
+        </div>
+        <!-- Image: right half, 3D -->
+        <div
+          class="relative flex w-1/2 shrink-0 items-center justify-center overflow-visible"
+          style="perspective: 600px;"
+        >
+          <Image
+            src={partuiImg}
+            alt=""
+            aria-hidden="true"
+            class="w-[130%] origin-left rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.03]"
+            style="transform: rotateY(-18deg) rotateX(5deg) translateX(8%); opacity: 0.92;"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </a>
+
+    <!-- HyprBind — 2col × 4row -->
+    <a
+      href="/projects/hyprbind"
+      class="group relative col-span-1 min-h-36 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+    >
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))] transition-opacity group-hover:opacity-80"
+      >
+      </div>
+      <div class="relative flex h-full">
+        <!-- Text: left half -->
+        <div class="flex w-1/2 shrink-0 flex-col justify-end p-8">
+          <h3 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
+            HyprBind
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Keybinding viewer for Hyprland using egui.
+          </p>
+        </div>
+        <!-- Image: right half, 3D -->
+        <div
+          class="relative flex w-1/2 shrink-0 items-center justify-center overflow-visible"
+          style="perspective: 600px;"
+        >
+          <Image
+            src={hyprbindImg}
+            alt=""
+            aria-hidden="true"
+            class="w-[130%] origin-left rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.03]"
+            style="transform: rotateY(-18deg) rotateX(5deg) translateX(8%); opacity: 0.92;"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </a>
+
+    <!-- Dotfiles — 1col × 4row -->
+    <a
+      href="/projects/dotfiles"
+      class="group relative col-span-1 min-h-36 overflow-hidden rounded-3xl border border-gray-200 bg-black md:row-span-4 dark:border-white/10"
+    >
+      <!-- Background image -->
+      <Image
+        src={dotfileImg}
+        alt=""
+        width={800}
+        height={450}
+        class="absolute inset-0 h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
+        aria-hidden="true"
+        loading="eager"
+      />
+      <!-- Overlay -->
+      <div
+        class="absolute inset-0 bg-linear-to-b from-black/40 via-black/20 to-black/65 transition-opacity duration-700 group-hover:opacity-30"
+      >
+      </div>
+      <div class="relative flex h-full flex-col p-6">
+        <span
+          class="mb-auto inline-flex w-fit items-center rounded-full border border-orange-300/40 bg-black/30 px-2 pt-1.5 pb-1 font-mono text-[10px] leading-none tracking-widest text-orange-300 uppercase backdrop-blur-sm"
+          >Dotfiles</span
+        >
+        <div>
+          <h3 class="text-lg font-bold text-white">Ryprland</h3>
+          <p class="mt-0.5 text-xs text-white/60">
+            My Arch Linux Dotfile using hyprland.
+          </p>
+        </div>
+      </div>
+    </a>
+
+    <!-- COMMIT filler — 2col × 4row -->
+    <div
+      class="group relative col-span-1 min-h-36 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+    >
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
+      >
+      </div>
+      <!-- light mode dots -->
+      <div
+        class="absolute inset-0 opacity-10 dark:hidden"
+        style="background-image: radial-gradient(#000000 0.5px, transparent 0.5px); background-size: 10px 10px;"
+      >
+      </div>
+      <!-- dark mode dots -->
+      <div
+        class="absolute inset-0 hidden opacity-20 dark:block"
+        style="background-image: radial-gradient(#ffffff 0.5px, transparent 0.5px); background-size: 10px 10px;"
+      >
+      </div>
+      <div
+        class="relative flex h-full flex-col items-center justify-center gap-3 p-8"
+      >
+        <div
+          class="text-5xl font-black text-black/10 italic transition-colors group-hover:text-black/20 dark:text-white/10 dark:group-hover:text-white/20"
+        >
+          COMMIT
+        </div>
+        <p class="text-xs text-gray-400 dark:text-gray-600">
+          Continuous development in Rust...
+        </p>
+      </div>
+    </div>
+
+    <!-- GitHub + Zenn — 1col × 4row (desktop), 2col split (mobile) -->
+    <div
+      class="col-span-1 grid grid-cols-2 gap-4 md:col-span-1 md:row-span-4 md:grid-cols-1"
+    >
+      <!-- GitHub -->
       <a
-        href="/blog"
-        class="rounded-md border border-gray-300 px-6 py-3 text-gray-700 transition-colors hover:bg-gray-50"
+        href="https://github.com/ry2x"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group relative min-h-24 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-2 dark:border-white/10 dark:bg-zinc-900"
       >
-        Read Blog
+        <div
+          class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(236,72,153,0.12),transparent)] transition-opacity group-hover:opacity-80 dark:bg-[radial-gradient(circle_at_50%_0%,rgba(236,72,153,0.18),transparent)]"
+        >
+        </div>
+        <div
+          class="relative flex h-full flex-col items-center justify-center gap-2 p-6"
+        >
+          <span
+            class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-600"
+            >External</span
+          >
+          <span
+            class="text-base font-bold text-gray-400 transition-colors group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+            ><Icon
+              name="octicon:mark-github-16"
+              class="mr-1 inline-block h-5 w-5"
+            /> GitHub ↗</span
+          >
+        </div>
+      </a>
+
+      <!-- Zenn Blog -->
+      <a
+        href="https://zenn.dev"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group relative min-h-24 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-2 dark:border-white/10 dark:bg-zinc-900"
+      >
+        <div
+          class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.1),transparent)] transition-opacity group-hover:opacity-80"
+        >
+        </div>
+        <div
+          class="relative flex h-full flex-col items-center justify-center gap-2 p-6"
+        >
+          <span
+            class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-600"
+            >External</span
+          >
+          <span
+            class="text-base font-bold text-gray-400 transition-colors group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+            ><Icon name="octicon:note-16" class="mr-1 inline-block h-5 w-5" />
+            Zenn ↗</span
+          >
+        </div>
       </a>
     </div>
-  </section>
 
-  <!-- Recent Projects -->
-  {
-    recentProjects.length > 0 && (
-      <section class="mb-12">
-        <div class="mb-6 flex items-center justify-between">
-          <h2 class="text-2xl font-bold text-gray-900">Recent Projects</h2>
-          <a href="/projects" class="text-blue-600 hover:text-blue-800">
-            View all →
-          </a>
-        </div>
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {recentProjects.map((project) => (
-            <article class="rounded-lg border border-gray-200 p-6 transition-shadow hover:shadow-md">
-              {project.data.cover && (
-                <img
-                  src={project.data.cover}
-                  alt={project.data.title}
-                  class="mb-4 h-40 w-full rounded-md object-cover"
-                />
-              )}
-              <h3 class="mb-2 text-lg font-semibold text-gray-900">
-                <a
-                  href={`/projects/${project.slug}`}
-                  class="hover:text-blue-600"
-                >
-                  {project.data.title}
-                </a>
-              </h3>
-              <p class="mb-4 text-gray-600">{project.data.description}</p>
-              {project.data.tags && (
-                <div class="flex flex-wrap gap-2">
-                  {project.data.tags.map((tag) => (
-                    <span class="rounded bg-gray-100 px-2 py-1 text-xs text-gray-700">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </article>
-          ))}
-        </div>
-      </section>
-    )
-  }
+    <!-- Recent Blog section label — 4col × 1row -->
+    <div
+      class="col-span-1 flex items-center rounded-2xl border border-gray-200 bg-gray-100 px-5 py-3 md:col-span-4 md:row-span-1 md:py-0 dark:border-white/5 dark:bg-zinc-900/50"
+    >
+      <span
+        class="font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-500"
+        >Recent Blog</span
+      >
+      <div class="mx-4 h-px flex-1 bg-gray-200 dark:bg-white/5"></div>
+      <a
+        href="/blog"
+        class="font-mono text-[10px] text-gray-400 transition-colors hover:text-gray-900 dark:text-gray-500 dark:hover:text-white"
+        >View all →</a
+      >
+    </div>
 
-  <!-- Recent Blog Posts -->
-  {
-    recentPosts.length > 0 && (
-      <section>
-        <div class="mb-6 flex items-center justify-between">
-          <h2 class="text-2xl font-bold text-gray-900">Recent Posts</h2>
-          <a href="/blog" class="text-blue-600 hover:text-blue-800">
-            View all →
-          </a>
-        </div>
-        <div class="space-y-6">
-          {recentPosts.map((post) => (
-            <article class="border-b border-gray-200 pb-6">
-              <div class="mb-2 flex flex-col md:flex-row md:items-center md:justify-between">
-                <h3 class="text-lg font-semibold text-gray-900">
-                  <a href={`/blog/${post.slug}`} class="hover:text-blue-600">
-                    {post.data.title}
-                  </a>
-                </h3>
-                <time class="text-sm text-gray-500">
-                  {new Date(post.data.date).toLocaleDateString('ja-JP')}
-                </time>
+    <!-- Blog post cards — 2col × 4row each -->
+    {
+      recentPosts.map((post) => (
+        <a
+          href={`/blog/${post.slug}`}
+          class="hero-card group relative col-span-1 min-h-40 overflow-hidden rounded-3xl border border-gray-200 md:col-span-2 md:row-span-3 dark:border-white/10"
+        >
+          <div class="hero-card-glow absolute inset-0" />
+          <div class="relative flex h-full flex-col justify-center p-6">
+            <time class="mb-2 font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-600">
+              {new Date(post.data.date).toLocaleDateString('ja-JP')}
+            </time>
+            <h3 class="mb-1 text-lg font-bold text-gray-900 dark:text-white">
+              {post.data.title}
+            </h3>
+            <p class="line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
+              {post.data.description}
+            </p>
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="mt-3 flex flex-wrap gap-1.5">
+                {post.data.tags.map((tag) => (
+                  <Tag tag={tag} />
+                ))}
               </div>
-              <p class="mb-3 text-gray-600">{post.data.description}</p>
-              {post.data.tags && (
-                <div class="flex flex-wrap gap-2">
-                  {post.data.tags.map((tag) => (
-                    <span class="rounded bg-gray-100 px-2 py-1 text-xs text-gray-700">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </article>
-          ))}
-        </div>
-      </section>
-    )
-  }
+            )}
+          </div>
+        </a>
+      ))
+    }
 
-  <!-- Empty State -->
-  {
-    recentPosts.length === 0 && recentProjects.length === 0 && (
-      <section class="py-12 text-center">
-        <div class="mb-8 text-gray-500">
-          <p class="mb-4 text-lg">No content available yet.</p>
-          <p>Start by adding some projects and blog posts!</p>
+    <!-- No posts placeholder -->
+    {
+      recentPosts.length === 0 && (
+        <div class="col-span-1 flex items-center justify-center rounded-3xl border border-gray-100 bg-gray-50 md:col-span-4 md:row-span-4 dark:border-white/5 dark:bg-zinc-900/30">
+          <p class="text-sm text-gray-400 dark:text-gray-600">No posts yet.</p>
         </div>
-        <div class="space-y-4 text-sm text-gray-400">
-          <p>
-            Add projects:{' '}
-            <code class="rounded bg-gray-100 px-2 py-1">
-              src/content/projects/
-            </code>
-          </p>
-          <p>
-            Add blog posts:{' '}
-            <code class="rounded bg-gray-100 px-2 py-1">src/content/blog/</code>
-          </p>
-          <p>
-            See:{' '}
-            <code class="rounded bg-gray-100 px-2 py-1">
-              src/content/README.md
-            </code>{' '}
-            for guidelines
-          </p>
-        </div>
-      </section>
-    )
-  }
+      )
+    }
+  </div>
 </BaseLayout>
