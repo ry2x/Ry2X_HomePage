@@ -12,12 +12,12 @@ import { Icon } from 'astro-icon/components';
   <Icon name="octicon:sun-16" class="hidden h-5 w-5 dark:block" />
   <!-- Moon icon (shown in light mode) -->
   <Icon name="octicon:moon-16" class="h-5 w-5 dark:hidden" />
-
-  <script>
-    const btn = document.getElementById('theme-toggle');
-    btn?.addEventListener('click', () => {
-      const isDark = document.documentElement.classList.toggle('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    });
-  </script>
 </button>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  btn?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+</script>
