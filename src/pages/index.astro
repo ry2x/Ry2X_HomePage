@@ -12,6 +12,17 @@ import partuiImg from '../assets/home/par_tui.png';
 import hyprbindImg from '../assets/home/hyprbind.png';
 
 const recentPosts = (await getAllPosts()).slice(0, 4);
+
+const heroDesc = {
+  en: 'Developing with Rust for fun. <br />Working with Java and TypeScript at work.',
+  ja: '趣味でRustを使ってます。<br />TypeScriptとかJavaを使って働いてます。',
+};
+
+const diracQuote = {
+  en: 'Living is worthwhile if one can contribute in some small way to this endless chain of progress.',
+  ja: '終わりなき進歩の連鎖に、たとえ小さな形であれ貢献できるなら、生きる価値はある',
+  author: 'Paul A.M. Dirac',
+};
 ---
 
 <BaseLayout
@@ -47,12 +58,10 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         <p
           id="hero-desc"
           class="text-sm text-gray-600 transition-opacity duration-300 dark:text-gray-400"
-          data-en="Developing with Rust for fun. <br />Working with Java and TypeScript at work."
-          data-ja="趣味でRustを使ってます。<br />TypeScriptとかJavaを使って働いてます。"
-        >
-          Developing with Rust for fun. <br />
-          Working with Java and TypeScript at work.
-        </p>
+          data-en={heroDesc.en}
+          data-ja={heroDesc.ja}
+          set:html={heroDesc.ja}
+        />
         <div class="mt-4 flex gap-2">
           <a
             href="/projects"
@@ -76,7 +85,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
       const heroDesc = document.getElementById('hero-desc');
 
       if (heroCard && heroDesc) {
-        let isJa = false;
+        let isJa = true;
 
         heroCard.addEventListener('click', (e) => {
           if (e.target instanceof Element && e.target.closest('a')) return;
@@ -124,11 +133,10 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         <p
           id="quote-text"
           class="text-center font-serif text-base leading-relaxed text-gray-800 italic transition-opacity duration-300 dark:text-white/80"
-          data-en="Living is worthwhile if one can contribute in some small way to this endless chain of progress."
-          data-ja="終わりなき進歩の連鎖に、たとえ小さな形であれ貢献できるなら、生きる価値はある"
+          data-en={diracQuote.en}
+          data-ja={diracQuote.ja}
         >
-          Living is worthwhile if one can contribute in some small way to this
-          endless chain of progress.
+          {diracQuote.ja}
         </p>
         <div>
           <span
@@ -138,7 +146,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
           <p
             class="text-center font-mono text-[10px] text-gray-500 dark:text-gray-400"
           >
-            — Paul A.M. Dirac
+            — {diracQuote.author}
           </p>
         </div>
       </div>
@@ -149,7 +157,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
       const text = document.getElementById('quote-text');
 
       if (card && text) {
-        let isJa = false;
+        let isJa = true;
 
         const toggle = () => {
           isJa = !isJa;
