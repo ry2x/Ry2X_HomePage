@@ -33,7 +33,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         alt=""
         aria-hidden="true"
         class="pointer-events-none absolute right-0 bottom-0 h-4/5 w-auto object-contain object-bottom opacity-0 transition-opacity duration-700 select-none group-hover:opacity-20 dark:group-hover:opacity-15"
-        loading="lazy"
+        loading="eager"
       />
       <div class="relative flex h-full flex-col justify-end p-8">
         <p
@@ -113,7 +113,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         width={300}
         class="pointer-events-none absolute inset-0 h-full w-full object-cover object-top opacity-0 transition-opacity duration-700 select-none group-hover:opacity-10 dark:group-hover:opacity-15"
         aria-hidden="true"
-        loading="lazy"
+        loading="eager"
       />
       <div class="hero-card-glow absolute inset-0"></div>
       <div class="relative flex h-full flex-col justify-center p-6">
@@ -158,8 +158,8 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
             const jaText = text.dataset.ja;
             const enText = text.dataset.en;
             text.textContent = isJa
-              ? (jaText || enText || text.textContent)
-              : (enText || jaText || text.textContent);
+              ? jaText || enText || text.textContent
+              : enText || jaText || text.textContent;
             text.style.opacity = '1';
           }, 300);
         };
@@ -221,7 +221,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
             aria-hidden="true"
             class="w-[130%] origin-left rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.03]"
             style="transform: rotateY(-18deg) rotateX(5deg) translateX(8%); opacity: 0.92;"
-            loading="lazy"
+            loading="eager"
           />
         </div>
       </div>
@@ -257,7 +257,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
             aria-hidden="true"
             class="w-[130%] origin-left rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.03]"
             style="transform: rotateY(-18deg) rotateX(5deg) translateX(8%); opacity: 0.92;"
-            loading="lazy"
+            loading="eager"
           />
         </div>
       </div>
@@ -276,7 +276,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         height={450}
         class="absolute inset-0 h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
         aria-hidden="true"
-        loading="lazy"
+        loading="eager"
       />
       <!-- Overlay -->
       <div
