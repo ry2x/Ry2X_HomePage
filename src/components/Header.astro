@@ -73,6 +73,7 @@ const navItems = [
     class="absolute top-1/2 right-5 flex h-8 w-8 -translate-y-1/2 flex-col items-center justify-center gap-1.75 md:hidden"
     aria-label="Toggle menu"
     aria-expanded="false"
+    aria-controls="mobile-menu"
   >
     <span
       class="hamburger-line block h-px w-5 bg-gray-500 transition-all duration-300 dark:bg-gray-400"
@@ -91,6 +92,7 @@ const navItems = [
   id="mobile-menu"
   class="fixed inset-0 z-60 flex flex-col items-center justify-center gap-8 bg-white/95 backdrop-blur-xl transition-all duration-300 md:hidden dark:bg-black/95"
   style="opacity:0; pointer-events:none;"
+  aria-hidden="true"
 >
   <nav class="flex flex-col items-center gap-6">
     {
@@ -113,32 +115,50 @@ const navItems = [
 </div>
 
 <script>
-  const toggle = document.getElementById('menu-toggle')!;
-  const menu = document.getElementById('mobile-menu')!;
-  let open = false;
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
 
-  function setMenu(state: boolean) {
-    open = state;
-    menu.style.opacity = open ? '1' : '0';
-    menu.style.pointerEvents = open ? 'auto' : 'none';
-    document.body.style.overflow = open ? 'hidden' : '';
-    toggle.setAttribute('aria-expanded', String(open));
+  if (toggle && menu) {
+    const btn = toggle;
+    const drawer = menu;
+    let open = false;
 
-    const lines = toggle.querySelectorAll<HTMLElement>('.hamburger-line');
-    if (open) {
-      lines[0].style.transform = 'translateY(8px) rotate(45deg)';
-      lines[1].style.opacity = '0';
-      lines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
-    } else {
-      lines[0].style.transform = '';
-      lines[1].style.opacity = '';
-      lines[2].style.transform = '';
+    function applyMenu() {
+      drawer.style.opacity = open ? '1' : '0';
+      drawer.style.pointerEvents = open ? 'auto' : 'none';
+      drawer.setAttribute('aria-hidden', String(!open));
+      document.body.style.overflow = open ? 'hidden' : '';
+      btn.setAttribute('aria-expanded', String(open));
+
+      const lines = btn.getElementsByTagName('span');
+      if (open) {
+        lines[0].style.transform = 'translateY(8px) rotate(45deg)';
+        lines[1].style.opacity = '0';
+        lines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+      } else {
+        lines[0].style.transform = '';
+        lines[1].style.opacity = '';
+        lines[2].style.transform = '';
+      }
     }
+
+    btn.addEventListener('click', () => {
+      open = !open;
+      applyMenu();
+    });
+
+    drawer.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        open = false;
+        applyMenu();
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && open) {
+        open = false;
+        applyMenu();
+      }
+    });
   }
-
-  toggle.addEventListener('click', () => setMenu(!open));
-
-  menu.querySelectorAll('a').forEach((a) => {
-    a.addEventListener('click', () => setMenu(false));
-  });
 </script>

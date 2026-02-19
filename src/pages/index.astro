@@ -23,6 +23,8 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
     <div
       id="hero-card"
       class="hero-card group relative col-span-1 min-h-64 cursor-pointer overflow-hidden rounded-3xl border border-gray-200 md:col-span-3 md:row-span-4 md:min-h-0 dark:border-white/10"
+      role="button"
+      tabindex="0"
     >
       <div class="hero-card-glow absolute inset-0"></div>
       <!-- Profile image: hidden by default, fades in on hover -->
@@ -31,7 +33,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         alt=""
         aria-hidden="true"
         class="pointer-events-none absolute right-0 bottom-0 h-4/5 w-auto object-contain object-bottom opacity-0 transition-opacity duration-700 select-none group-hover:opacity-20 dark:group-hover:opacity-15"
-        loading="eager"
+        loading="lazy"
       />
       <div class="relative flex h-full flex-col justify-end p-8">
         <p
@@ -70,26 +72,39 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
     </div>
 
     <script>
-      const heroCard = document.getElementById('hero-card')!;
-      const heroDesc = document.getElementById('hero-desc')!;
-      let isJa = false;
+      const heroCard = document.getElementById('hero-card');
+      const heroDesc = document.getElementById('hero-desc');
 
-      heroCard.addEventListener('click', (e) => {
-        if ((e.target as HTMLElement).closest('a')) return;
-        isJa = !isJa;
-        heroDesc.style.opacity = '0';
-        setTimeout(() => {
-          const text = isJa ? heroDesc.dataset.ja! : heroDesc.dataset.en!;
-          heroDesc.innerHTML = text.replace('\\n', '<br />');
-          heroDesc.style.opacity = '1';
-        }, 300);
-      });
+      if (heroCard && heroDesc) {
+        let isJa = false;
+
+        heroCard.addEventListener('click', (e) => {
+          if (e.target instanceof Element && e.target.closest('a')) return;
+          isJa = !isJa;
+          heroDesc.style.opacity = '0';
+          setTimeout(() => {
+            const text = isJa ? heroDesc.dataset.ja : heroDesc.dataset.en;
+            if (typeof text !== 'string') return;
+            heroDesc.innerHTML = text.replace('\\n', '<br />');
+            heroDesc.style.opacity = '1';
+          }, 300);
+        });
+
+        heroCard.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            heroCard.click();
+          }
+        });
+      }
     </script>
 
     <!-- Quote card — 1col × 4row -->
     <div
       id="quote-card"
       class="hero-card group relative col-span-1 min-h-48 cursor-pointer overflow-hidden rounded-3xl border border-gray-200 md:row-span-4 md:min-h-0 dark:border-white/10"
+      role="button"
+      tabindex="0"
     >
       <!-- Dirac watermark: hidden by default, fades in on hover -->
       <Image
@@ -98,7 +113,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         width={300}
         class="pointer-events-none absolute inset-0 h-full w-full object-cover object-top opacity-0 transition-opacity duration-700 select-none group-hover:opacity-10 dark:group-hover:opacity-15"
         aria-hidden="true"
-        loading="eager"
+        loading="lazy"
       />
       <div class="hero-card-glow absolute inset-0"></div>
       <div class="relative flex h-full flex-col justify-center p-6">
@@ -130,18 +145,34 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
     </div>
 
     <script>
-      const card = document.getElementById('quote-card')!;
-      const text = document.getElementById('quote-text')!;
-      let isJa = false;
+      const card = document.getElementById('quote-card');
+      const text = document.getElementById('quote-text');
 
-      card.addEventListener('click', () => {
-        isJa = !isJa;
-        text.style.opacity = '0';
-        setTimeout(() => {
-          text.textContent = isJa ? text.dataset.ja! : text.dataset.en!;
-          text.style.opacity = '1';
-        }, 300);
-      });
+      if (card && text) {
+        let isJa = false;
+
+        const toggle = () => {
+          isJa = !isJa;
+          text.style.opacity = '0';
+          setTimeout(() => {
+            const jaText = text.dataset.ja;
+            const enText = text.dataset.en;
+            text.textContent = isJa
+              ? (jaText || enText || text.textContent)
+              : (enText || jaText || text.textContent);
+            text.style.opacity = '1';
+          }, 300);
+        };
+
+        card.addEventListener('click', toggle);
+
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle();
+          }
+        });
+      }
     </script>
 
     <!-- Projects section label — 4col × 1row -->
@@ -190,7 +221,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
             aria-hidden="true"
             class="w-[130%] origin-left rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.03]"
             style="transform: rotateY(-18deg) rotateX(5deg) translateX(8%); opacity: 0.92;"
-            loading="eager"
+            loading="lazy"
           />
         </div>
       </div>
@@ -226,7 +257,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
             aria-hidden="true"
             class="w-[130%] origin-left rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.03]"
             style="transform: rotateY(-18deg) rotateX(5deg) translateX(8%); opacity: 0.92;"
-            loading="eager"
+            loading="lazy"
           />
         </div>
       </div>
@@ -245,7 +276,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
         height={450}
         class="absolute inset-0 h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
         aria-hidden="true"
-        loading="eager"
+        loading="lazy"
       />
       <!-- Overlay -->
       <div
@@ -306,7 +337,7 @@ const recentPosts = (await getAllPosts()).slice(0, 4);
     >
       <!-- GitHub -->
       <a
-        href="https://github.com"
+        href="https://github.com/ry2x"
         target="_blank"
         rel="noopener noreferrer"
         class="group relative min-h-24 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-2 dark:border-white/10 dark:bg-zinc-900"
