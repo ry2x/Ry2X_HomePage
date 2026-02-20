@@ -60,6 +60,7 @@ const formEnabled = Boolean(TURNSTILE_SITE_KEY);
           type="text"
           required
           autocomplete="name"
+          maxlength="100"
           placeholder="山田 太郎"
           class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition outline-none placeholder:text-gray-300 focus:border-gray-400 focus:ring-2 focus:ring-gray-200 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-white/20 dark:focus:border-white/30 dark:focus:ring-white/10"
         />
@@ -79,6 +80,7 @@ const formEnabled = Boolean(TURNSTILE_SITE_KEY);
           type="email"
           required
           autocomplete="email"
+          maxlength="254"
           placeholder="taro-yamada@example.com"
           class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition outline-none placeholder:text-gray-300 focus:border-gray-400 focus:ring-2 focus:ring-gray-200 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-white/20 dark:focus:border-white/30 dark:focus:ring-white/10"
         />
@@ -97,6 +99,7 @@ const formEnabled = Boolean(TURNSTILE_SITE_KEY);
           name="message"
           required
           rows="6"
+          maxlength="5000"
           placeholder="ご用件をご記入ください…"
           class="w-full resize-y rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition outline-none placeholder:text-gray-300 focus:border-gray-400 focus:ring-2 focus:ring-gray-200 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-white/20 dark:focus:border-white/30 dark:focus:ring-white/10"
         ></textarea>
@@ -104,9 +107,11 @@ const formEnabled = Boolean(TURNSTILE_SITE_KEY);
 
       <!-- Turnstile widget -->
       <div>
+        <label id="turnstile-label" class="sr-only">CAPTCHA 認証</label>
         <div
           id="cf-turnstile"
           class="cf-turnstile"
+          aria-labelledby="turnstile-label"
           data-sitekey={TURNSTILE_SITE_KEY}
           data-theme="auto"
           data-callback="onTurnstileSuccess"
@@ -239,7 +244,7 @@ const formEnabled = Boolean(TURNSTILE_SITE_KEY);
       }
 
       // Show success state
-      form.classList.add('hidden');
+      form?.classList.add('hidden');
       successMsg?.classList.remove('hidden');
     } catch {
       showError(

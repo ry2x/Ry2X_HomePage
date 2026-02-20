@@ -1,7 +1,7 @@
 {
   // https://developers.cloudflare.com/workers/wrangler/configuration/
   "name": "ry2x-homepage",
-  "compatibility_date": "2026-02-19",
+  "compatibility_date": "2026-02-20",
   "compatibility_flags": ["nodejs_compat"],
   "pages_build_output_dir": "./dist",
 

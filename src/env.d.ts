@@ -10,7 +10,7 @@ type CloudflareEnv = {
 };
 
 declare namespace App {
-  type Locals = Runtime<CloudflareEnv>;
+  interface Locals extends Runtime<CloudflareEnv> {}
 }
 
 declare global {
