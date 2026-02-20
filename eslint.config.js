@@ -25,7 +25,8 @@ export default [
       'pnpm-lock.yaml',
       '*.config.js',
       '*.config.mjs',
-      '*.config.ts'
+      '*.config.ts',
+      '.wrangler/**'
     ]
   },
 
