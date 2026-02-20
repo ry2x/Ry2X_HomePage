@@ -6,6 +6,4 @@ tags: ['arch-linux', 'hyprland', 'dotfiles']
 draft: false
 ---
 
-# Ryprland — Dotfiles
-
 メンテナンス中です。　ごめんなさい。

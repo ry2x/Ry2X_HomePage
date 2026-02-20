@@ -6,8 +6,6 @@ tags: ['astro', 'tailwind', 'typescript']
 draft: false
 ---
 
-# Ry2X.NET — 個人ホームページ
-
 このサイト自体のプロジェクトページです。
 
 - **GitHub**: [ry2x/Ry2X_HomePage](https://github.com/ry2x/Ry2X_HomePage)
@@ -23,7 +21,7 @@ draft: false
 ## 技術スタック
 
 | 技術 | 用途 |
-|------|------|
+| ------ | ------ |
 | [Astro](https://astro.build/) | 静的サイトジェネレーター |
 | [Tailwind CSS](https://tailwindcss.com/) | スタイリング |
 | [TypeScript](https://www.typescriptlang.org/) | 型安全なスクリプト |

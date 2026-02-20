@@ -6,6 +6,4 @@ tags: ['rust', 'egui', 'hyprland']
 draft: false
 ---
 
-# HyprBind
-
 メンテナンス中です。　ごめんなさい。
