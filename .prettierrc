@@ -13,5 +13,6 @@
   "singleQuote": true,
   "printWidth": 80,
   "quoteProps": "consistent",
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "trailingComma": "none"
 }

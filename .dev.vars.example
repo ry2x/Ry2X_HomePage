@@ -1,0 +1,9 @@
+# Wrangler local development secrets
+# Copy this file to .dev.vars and fill in your actual values.
+# NEVER commit .dev.vars to version control.
+
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# test secret key
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
+CONTACT_TO_EMAIL=contact@ry2x.net
+CONTACT_FROM_EMAIL=Contact Form <noreply@ry2x.net>

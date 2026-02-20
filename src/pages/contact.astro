@@ -1,0 +1,259 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+const formEnabled = Boolean(TURNSTILE_SITE_KEY);
+---
+
+<BaseLayout title="Contact | Ry2X.NET" description="Get in touch with Ry2X.">
+  <section class="mx-auto max-w-xl">
+    <h1
+      class="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
+    >
+      Contact
+    </h1>
+    <p class="mb-8 text-sm text-gray-500 dark:text-gray-400">
+      お気軽にどうぞ。通常 1〜2 日以内に返信します。
+    </p>
+
+    <!-- Config error fallback -->
+    {
+      !formEnabled && (
+        <p class="rounded-xl border border-yellow-200 bg-yellow-50 px-6 py-4 text-sm text-yellow-800 dark:border-yellow-800 dark:bg-yellow-950 dark:text-yellow-300">
+          コンタクトフォームは現在利用できません。設定をご確認ください。
+        </p>
+      )
+    }
+
+    <!-- Success state -->
+    <div
+      id="success-msg"
+      class="hidden rounded-xl border border-green-200 bg-green-50 px-6 py-8 text-center dark:border-green-800 dark:bg-green-950"
+      role="status"
+      aria-live="polite"
+    >
+      <p class="text-lg font-semibold text-green-700 dark:text-green-300">
+        送信しました ✓
+      </p>
+      <p class="mt-2 text-sm text-green-600 dark:text-green-400">
+        メッセージありがとうございます。折り返しご連絡します。
+      </p>
+    </div>
+
+    <!-- Form -->
+    <form
+      id="contact-form"
+      novalidate
+      class:list={['space-y-5', { hidden: !formEnabled }]}
+    >
+      <!-- Name -->
+      <div>
+        <label
+          for="name"
+          class="mb-1.5 block text-xs font-semibold tracking-widest text-gray-600 uppercase dark:text-gray-400"
+        >
+          Name <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          autocomplete="name"
+          maxlength="100"
+          placeholder="山田 太郎"
+          class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition outline-none placeholder:text-gray-300 focus:border-gray-400 focus:ring-2 focus:ring-gray-200 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-white/20 dark:focus:border-white/30 dark:focus:ring-white/10"
+        />
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label
+          for="email"
+          class="mb-1.5 block text-xs font-semibold tracking-widest text-gray-600 uppercase dark:text-gray-400"
+        >
+          Email <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          autocomplete="email"
+          maxlength="254"
+          placeholder="taro-yamada@example.com"
+          class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition outline-none placeholder:text-gray-300 focus:border-gray-400 focus:ring-2 focus:ring-gray-200 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-white/20 dark:focus:border-white/30 dark:focus:ring-white/10"
+        />
+      </div>
+
+      <!-- Message -->
+      <div>
+        <label
+          for="message"
+          class="mb-1.5 block text-xs font-semibold tracking-widest text-gray-600 uppercase dark:text-gray-400"
+        >
+          Message <span class="text-red-500">*</span>
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows="6"
+          maxlength="5000"
+          placeholder="ご用件をご記入ください…"
+          class="w-full resize-y rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition outline-none placeholder:text-gray-300 focus:border-gray-400 focus:ring-2 focus:ring-gray-200 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-white/20 dark:focus:border-white/30 dark:focus:ring-white/10"
+        ></textarea>
+      </div>
+
+      <!-- Turnstile widget -->
+      <div>
+        <label id="turnstile-label" class="sr-only">CAPTCHA 認証</label>
+        <div
+          id="cf-turnstile"
+          class="cf-turnstile"
+          aria-labelledby="turnstile-label"
+          data-sitekey={TURNSTILE_SITE_KEY}
+          data-theme="auto"
+          data-callback="onTurnstileSuccess"
+          data-expired-callback="onTurnstileExpired"
+        >
+        </div>
+      </div>
+
+      <!-- Error message -->
+      <p
+        id="form-error"
+        class="hidden rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-950 dark:text-red-400"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+      </p>
+
+      <!-- Submit -->
+      <button
+        id="submit-btn"
+        type="submit"
+        class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-gray-900 px-6 py-3 text-xs font-semibold tracking-widest text-white uppercase transition-all hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50 dark:border-white/10 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+      >
+        <span id="btn-label">Send Message</span>
+        <svg
+          id="btn-spinner"
+          class="hidden h-4 w-4 animate-spin"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+          ></path>
+        </svg>
+      </button>
+    </form>
+  </section>
+</BaseLayout>
+
+<!-- Cloudflare Turnstile script -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer
+></script>
+
+<script>
+  let turnstileToken: string | null = null;
+
+  // Turnstile callbacks (must be globally accessible)
+  window.onTurnstileSuccess = (token: string) => {
+    turnstileToken = token;
+  };
+  window.onTurnstileExpired = () => {
+    turnstileToken = null;
+  };
+
+  const form = document.getElementById(
+    'contact-form'
+  ) as HTMLFormElement | null;
+  const successMsg = document.getElementById('success-msg');
+  const errorEl = document.getElementById('form-error');
+  const submitBtn = document.getElementById(
+    'submit-btn'
+  ) as HTMLButtonElement | null;
+  const btnLabel = document.getElementById('btn-label');
+  const btnSpinner = document.getElementById('btn-spinner');
+
+  function setLoading(loading: boolean) {
+    if (!submitBtn || !btnLabel || !btnSpinner) return;
+    submitBtn.disabled = loading;
+    btnLabel.textContent = loading ? 'Sending…' : 'Send Message';
+    btnSpinner.classList.toggle('hidden', !loading);
+  }
+
+  function showError(msg: string) {
+    if (!errorEl) return;
+    errorEl.textContent = msg;
+    errorEl.classList.remove('hidden');
+  }
+
+  function clearError() {
+    if (!errorEl) return;
+    errorEl.textContent = '';
+    errorEl.classList.add('hidden');
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearError();
+
+    const nameEl = document.getElementById('name') as HTMLInputElement;
+    const emailEl = document.getElementById('email') as HTMLInputElement;
+    const messageEl = document.getElementById('message') as HTMLTextAreaElement;
+
+    const name = nameEl?.value.trim();
+    const email = emailEl?.value.trim();
+    const message = messageEl?.value.trim();
+
+    if (!name || !email || !message) {
+      showError('すべての項目を入力してください。');
+      return;
+    }
+
+    if (!turnstileToken) {
+      showError('CAPTCHA を完了してください。');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message, turnstileToken })
+      });
+
+      const data = (await res.json()) as { ok?: boolean; error?: string };
+
+      if (!res.ok || !data.ok) {
+        showError(
+          data.error ??
+            'エラーが発生しました。しばらくしてから再度お試しください。'
+        );
+        // Reset Turnstile so the user can retry without a page refresh
+        turnstileToken = null;
+        window.turnstile?.reset();
+        return;
+      }
+
+      // Show success state
+      form?.classList.add('hidden');
+      successMsg?.classList.remove('hidden');
+    } catch {
+      showError(
+        'ネットワークエラーが発生しました。しばらくしてから再度お試しください。'
+      );
+      turnstileToken = null;
+      window.turnstile?.reset();
+    } finally {
+      setLoading(false);
+    }
+  });
+</script>

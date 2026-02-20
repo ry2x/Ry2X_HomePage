@@ -8,32 +8,40 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy": "wrangler pages deploy ./dist",
+    "dev-deploy": "pnpm build && wrangler pages dev",
+    "deploy": "wrangler pages deploy",
     "astro": "astro"
   },
   "pnpm": {
-    "ignoredBuiltDependencies": ["esbuild", "sharp"]
+    "ignoredBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   },
   "devDependencies": {
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/ts-plugin": "^1.10.6",
     "@eslint/js": "^10.0.1",
+    "@iconify-json/octicon": "^1.2.21",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
+    "@typescript-eslint/parser": "^8.55.0",
     "astro": "^5.17.1",
     "astro-icon": "^1.1.5",
-    "sharp": "^0.34.5",
-    "tailwindcss": "^4.1.18",
-    "@iconify-json/octicon": "^1.2.21",
-    "@typescript-eslint/parser": "^8.55.0",
     "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.6.0",
     "prettier": "3.8.1",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.7.2",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.1.18",
     "typescript-eslint": "^8.55.0",
     "wrangler": "^4.67.0"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.6.12",
+    "resend": "^6.9.2"
   }
 }

@@ -6,6 +6,4 @@ tags: ['rust', 'ratatui', 'arch-linux']
 draft: false
 ---
 
-# par_TUI
-
 メンテナンス中です。　ごめんなさい。

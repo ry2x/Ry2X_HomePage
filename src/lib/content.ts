@@ -23,7 +23,7 @@ export async function getAllPosts(): Promise<Post[]> {
   });
 
   return posts.sort(
-    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
   );
 }
 
@@ -50,7 +50,7 @@ export async function getAllProjects(): Promise<Project[]> {
 
 // Get a single project by slug
 export async function getProjectBySlug(
-  slug: string,
+  slug: string
 ): Promise<Project | undefined> {
   const projects = await getAllProjects();
   return projects.find((project) => project.slug === slug);
@@ -61,6 +61,6 @@ export function formatDate(dateString: string): string {
   return new Date(dateString).toLocaleDateString('ja-JP', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric',
+    day: 'numeric'
   });
 }
