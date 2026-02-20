@@ -25,8 +25,8 @@ export default [
       'pnpm-lock.yaml',
       '*.config.js',
       '*.config.mjs',
-      '*.config.ts',
-    ],
+      '*.config.ts'
+    ]
   },
 
   // TypeScript files configuration
@@ -35,16 +35,16 @@ export default [
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
-        project: './tsconfig.json',
-      },
+        project: './tsconfig.json'
+      }
     },
     rules: {
       // Add custom TypeScript rules here if needed
       '@typescript-eslint/no-unused-vars': [
         'error',
-        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
-      ],
-    },
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
+      ]
+    }
   },
 
   // Astro files configuration
@@ -54,11 +54,11 @@ export default [
       parser: eslintPluginAstro.parser,
       parserOptions: {
         parser: tseslint.parser,
-        extraFileExtensions: ['.astro'],
-      },
+        extraFileExtensions: ['.astro']
+      }
     },
     rules: {
       // Add custom Astro rules here if needed
-    },
-  },
+    }
+  }
 ];

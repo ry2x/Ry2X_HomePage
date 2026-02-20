@@ -20,12 +20,12 @@ draft: false
 
 ## 技術スタック
 
-| 技術 | 用途 |
-| ------ | ------ |
-| [Astro](https://astro.build/) | 静的サイトジェネレーター |
-| [Tailwind CSS](https://tailwindcss.com/) | スタイリング |
-| [TypeScript](https://www.typescriptlang.org/) | 型安全なスクリプト |
-| Markdown | コンテンツ管理 |
+| 技術                                          | 用途                     |
+| --------------------------------------------- | ------------------------ |
+| [Astro](https://astro.build/)                 | 静的サイトジェネレーター |
+| [Tailwind CSS](https://tailwindcss.com/)      | スタイリング             |
+| [TypeScript](https://www.typescriptlang.org/) | 型安全なスクリプト       |
+| Markdown                                      | コンテンツ管理           |
 
 ## こだわりポイント
 
