@@ -145,19 +145,28 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   const resend = new Resend(resendApiKey);
 
-  const { error: resendError } = await resend.emails.send({
-    from: fromEmail,
-    to: [toEmail],
-    replyTo: safeEmail,
-    subject: `[Contact] ${safeName}`,
-    text: [`Name: ${safeName}`, `Email: ${safeEmail}`, '', message].join('\n'),
-    html: `
+  let resendError: unknown;
+  try {
+    const result = await resend.emails.send({
+      from: fromEmail,
+      to: [toEmail],
+      replyTo: safeEmail,
+      subject: `[Contact] ${safeName}`,
+      text: [`Name: ${safeName}`, `Email: ${safeEmail}`, '', message].join(
+        '\n'
+      ),
+      html: `
       <p><strong>Name:</strong> ${escapeHtml(safeName)}</p>
       <p><strong>Email:</strong> ${escapeHtml(safeEmail)}</p>
       <hr />
       <pre style="font-family:sans-serif;white-space:pre-wrap">${escapeHtml(message)}</pre>
     `
-  });
+    });
+    resendError = result.error;
+  } catch (err) {
+    console.error('Resend exception:', err);
+    return Response.json({ error: 'Failed to send message' }, { status: 500 });
+  }
 
   if (resendError) {
     console.error('Resend error:', resendError);

@@ -1,13 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
-
-if (!TURNSTILE_SITE_KEY) {
-  throw new Error(
-    'PUBLIC_TURNSTILE_SITE_KEY is not set. Set it in your environment to enable the contact form Turnstile protection.'
-  );
-}
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+const formEnabled = Boolean(TURNSTILE_SITE_KEY);
 ---
 
 <BaseLayout title="Contact | Ry2X.NET" description="Get in touch with Ry2X.">
@@ -20,6 +15,15 @@ if (!TURNSTILE_SITE_KEY) {
     <p class="mb-8 text-sm text-gray-500 dark:text-gray-400">
       お気軽にどうぞ。通常 1〜2 日以内に返信します。
     </p>
+
+    <!-- Config error fallback -->
+    {
+      !formEnabled && (
+        <p class="rounded-xl border border-yellow-200 bg-yellow-50 px-6 py-4 text-sm text-yellow-800 dark:border-yellow-800 dark:bg-yellow-950 dark:text-yellow-300">
+          コンタクトフォームは現在利用できません。設定をご確認ください。
+        </p>
+      )
+    }
 
     <!-- Success state -->
     <div
@@ -37,7 +41,11 @@ if (!TURNSTILE_SITE_KEY) {
     </div>
 
     <!-- Form -->
-    <form id="contact-form" novalidate class="space-y-5">
+    <form
+      id="contact-form"
+      novalidate
+      class:list={['space-y-5', { hidden: !formEnabled }]}
+    >
       <!-- Name -->
       <div>
         <label
@@ -226,7 +234,7 @@ if (!TURNSTILE_SITE_KEY) {
         );
         // Reset Turnstile so the user can retry without a page refresh
         turnstileToken = null;
-        window.turnstile?.reset('#cf-turnstile');
+        window.turnstile?.reset();
         return;
       }
 
@@ -238,7 +246,7 @@ if (!TURNSTILE_SITE_KEY) {
         'ネットワークエラーが発生しました。しばらくしてから再度お試しください。'
       );
       turnstileToken = null;
-      window.turnstile?.reset('#cf-turnstile');
+      window.turnstile?.reset();
     } finally {
       setLoading(false);
     }
