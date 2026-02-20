@@ -76,15 +76,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const safeEmail = email.replace(/[\r\n]/g, '').trim();
 
   // --- Turnstile verification ---
-  const {
-    TURNSTILE_SECRET_KEY: turnstileSecret,
-    RESEND_API_KEY: resendApiKey,
-    CONTACT_TO_EMAIL,
-    CONTACT_FROM_EMAIL
-  } = import.meta.env;
+  const { env } = locals.runtime;
 
-  const toEmail = CONTACT_TO_EMAIL ?? 'contact@ry2x.net';
-  const fromEmail = CONTACT_FROM_EMAIL ?? 'Contact Form <noreply@ry2x.net>';
+  const turnstileSecret = env.TURNSTILE_SECRET_KEY;
+  const resendApiKey = env.RESEND_API_KEY;
+  const toEmail = env.CONTACT_TO_EMAIL ?? 'contact@ry2x.net';
+  const fromEmail = env.CONTACT_FROM_EMAIL ?? 'Contact Form <noreply@ry2x.net>';
 
   if (!turnstileSecret) {
     console.error('TURNSTILE_SECRET_KEY is not set');
