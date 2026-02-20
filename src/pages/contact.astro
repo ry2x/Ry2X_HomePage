@@ -149,12 +149,10 @@ if (!TURNSTILE_SITE_KEY) {
   let turnstileToken: string | null = null;
 
   // Turnstile callbacks (must be globally accessible)
-  (window as unknown as Record<string, unknown>).onTurnstileSuccess = (
-    token: string
-  ) => {
+  window.onTurnstileSuccess = (token: string) => {
     turnstileToken = token;
   };
-  (window as unknown as Record<string, unknown>).onTurnstileExpired = () => {
+  window.onTurnstileExpired = () => {
     turnstileToken = null;
   };
 
@@ -228,14 +226,7 @@ if (!TURNSTILE_SITE_KEY) {
         );
         // Reset Turnstile so the user can retry without a page refresh
         turnstileToken = null;
-        if (
-          typeof (window as unknown as Record<string, unknown>).turnstile !==
-          'undefined'
-        ) {
-          (
-            window as unknown as { turnstile: { reset: (id: string) => void } }
-          ).turnstile.reset('#cf-turnstile');
-        }
+        window.turnstile?.reset('#cf-turnstile');
         return;
       }
 
@@ -247,14 +238,7 @@ if (!TURNSTILE_SITE_KEY) {
         'ネットワークエラーが発生しました。しばらくしてから再度お試しください。'
       );
       turnstileToken = null;
-      if (
-        typeof (window as unknown as Record<string, unknown>).turnstile !==
-        'undefined'
-      ) {
-        (
-          window as unknown as { turnstile: { reset: (id: string) => void } }
-        ).turnstile.reset('#cf-turnstile');
-      }
+      window.turnstile?.reset('#cf-turnstile');
     } finally {
       setLoading(false);
     }

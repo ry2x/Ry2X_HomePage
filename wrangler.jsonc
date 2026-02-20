@@ -6,7 +6,7 @@
   "pages_build_output_dir": "./dist",
 
   "vars": {
-    "CONTACT_TO_EMAIL": "yuli121220.big@gmail.com"
+    "CONTACT_TO_EMAIL": "contact@ry2x.net"
   }
 
   // PUBLIC_TURNSTILE_SITE_KEY: set in Cloudflare Dashboard > Pages > Settings > Environment Variables (Build phase)

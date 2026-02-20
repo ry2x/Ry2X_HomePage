@@ -76,23 +76,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const safeEmail = email.replace(/[\r\n]/g, '').trim();
 
   // --- Turnstile verification ---
-  const runtime = (
-    locals as { runtime?: { env: Record<string, string | undefined> } }
-  ).runtime;
-
-  if (!runtime?.env) {
-    console.error('Runtime environment is not available');
-    return Response.json(
-      { error: 'Server configuration error' },
-      { status: 500 }
-    );
-  }
-
-  const { env } = runtime;
+  const { env } = locals.runtime;
 
   const turnstileSecret = env.TURNSTILE_SECRET_KEY;
   const resendApiKey = env.RESEND_API_KEY;
   const toEmail = env.CONTACT_TO_EMAIL ?? 'contact@ry2x.net';
+  const fromEmail = env.CONTACT_FROM_EMAIL ?? 'Contact Form <noreply@ry2x.net>';
 
   if (!turnstileSecret) {
     console.error('TURNSTILE_SECRET_KEY is not set');
@@ -157,7 +146,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const resend = new Resend(resendApiKey);
 
   const { error: resendError } = await resend.emails.send({
-    from: 'Contact Form <noreply@ry2x.net>',
+    from: fromEmail,
     to: [toEmail],
     replyTo: safeEmail,
     subject: `[Contact] ${safeName}`,
