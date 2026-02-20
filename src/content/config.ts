@@ -14,8 +14,8 @@ const blog = defineCollection({
       tags: z.array(z.string()).optional(),
       slug: z.string().optional(),
       cover: img().optional(),
-      draft: z.boolean().optional().default(false),
-    }),
+      draft: z.boolean().optional().default(false)
+    })
 });
 
 // Define the projects collection
@@ -33,12 +33,12 @@ const projects = defineCollection({
       tags: z.array(z.string()).optional(),
       slug: z.string().optional(),
       cover: img().optional(),
-      draft: z.boolean().optional().default(false),
-    }),
+      draft: z.boolean().optional().default(false)
+    })
 });
 
 // Export collections
 export const collections = {
   blog,
-  projects,
+  projects
 };
