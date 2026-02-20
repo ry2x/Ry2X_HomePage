@@ -3,10 +3,13 @@
   "name": "ry2x-homepage",
   "compatibility_date": "2026-02-19",
   "compatibility_flags": ["nodejs_compat"],
-  "pages_build_output_dir": "./dist"
+  "pages_build_output_dir": "./dist",
 
-  // Non-secret vars
-  // set PUBLIC_TURNSTILE_SITE_KEY in Cloudflare Dashboard > Pages > Settings > Environment Variables
+  "vars": {
+    "CONTACT_TO_EMAIL": "yuli121220.big@gmail.com"
+  }
+
+  // PUBLIC_TURNSTILE_SITE_KEY: set in Cloudflare Dashboard > Pages > Settings > Environment Variables (Build phase)
 
   // Secrets — set via Cloudflare Dashboard (Pages > Settings > Environment Variables) or:
   //   wrangler pages secret put RESEND_API_KEY

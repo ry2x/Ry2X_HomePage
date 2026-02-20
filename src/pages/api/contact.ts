@@ -45,6 +45,36 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return Response.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
+  // Length limits
+  if (name.trim().length > 100) {
+    return Response.json(
+      { error: 'Name is too long (max 100 chars)' },
+      { status: 400 }
+    );
+  }
+  if (email.trim().length > 254) {
+    return Response.json(
+      { error: 'Email is too long (max 254 chars)' },
+      { status: 400 }
+    );
+  }
+  if (message.trim().length > 5000) {
+    return Response.json(
+      { error: 'Message is too long (max 5000 chars)' },
+      { status: 400 }
+    );
+  }
+
+  // Basic email format validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email.trim())) {
+    return Response.json({ error: 'Invalid email address' }, { status: 400 });
+  }
+
+  // Sanitize against header injection (strip CR/LF)
+  const safeName = name.replace(/[\r\n]/g, ' ').trim();
+  const safeEmail = email.replace(/[\r\n]/g, '').trim();
+
   // --- Turnstile verification ---
   const runtime = (
     locals as { runtime?: { env: Record<string, string | undefined> } }
@@ -77,11 +107,35 @@ export const POST: APIRoute = async ({ request, locals }) => {
   tsForm.append('response', turnstileToken);
   tsForm.append('remoteip', request.headers.get('CF-Connecting-IP') ?? '');
 
-  const tsRes = await fetch(TURNSTILE_VERIFY_URL, {
-    method: 'POST',
-    body: tsForm
-  });
-  const tsData = (await tsRes.json()) as TurnstileResponse;
+  let tsData: TurnstileResponse;
+  try {
+    const tsRes = await fetch(TURNSTILE_VERIFY_URL, {
+      method: 'POST',
+      body: tsForm
+    });
+    if (!tsRes.ok) {
+      console.error('Turnstile HTTP error:', tsRes.status, tsRes.statusText);
+      return Response.json(
+        { error: 'CAPTCHA verification unavailable' },
+        { status: 502 }
+      );
+    }
+    try {
+      tsData = (await tsRes.json()) as TurnstileResponse;
+    } catch (parseErr) {
+      console.error('Turnstile JSON parse error:', parseErr);
+      return Response.json(
+        { error: 'CAPTCHA verification unavailable' },
+        { status: 502 }
+      );
+    }
+  } catch (fetchErr) {
+    console.error('Turnstile fetch error:', fetchErr);
+    return Response.json(
+      { error: 'CAPTCHA verification unavailable' },
+      { status: 502 }
+    );
+  }
 
   if (!tsData.success) {
     console.warn('Turnstile failed:', tsData['error-codes']);
@@ -105,12 +159,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const { error: resendError } = await resend.emails.send({
     from: 'Contact Form <noreply@ry2x.net>',
     to: [toEmail],
-    replyTo: email,
-    subject: `[Contact] ${name}`,
-    text: [`Name: ${name}`, `Email: ${email}`, '', message].join('\n'),
+    replyTo: safeEmail,
+    subject: `[Contact] ${safeName}`,
+    text: [`Name: ${safeName}`, `Email: ${safeEmail}`, '', message].join('\n'),
     html: `
-      <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+      <p><strong>Name:</strong> ${escapeHtml(safeName)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(safeEmail)}</p>
       <hr />
       <pre style="font-family:sans-serif;white-space:pre-wrap">${escapeHtml(message)}</pre>
     `

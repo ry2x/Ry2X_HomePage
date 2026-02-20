@@ -1,7 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+
+if (!TURNSTILE_SITE_KEY) {
+  throw new Error(
+    'PUBLIC_TURNSTILE_SITE_KEY is not set. Set it in your environment to enable the contact form Turnstile protection.'
+  );
+}
 ---
 
 <BaseLayout title="Contact | Ry2X.NET" description="Get in touch with Ry2X.">
@@ -19,6 +25,8 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
     <div
       id="success-msg"
       class="hidden rounded-xl border border-green-200 bg-green-50 px-6 py-8 text-center dark:border-green-800 dark:bg-green-950"
+      role="status"
+      aria-live="polite"
     >
       <p class="text-lg font-semibold text-green-700 dark:text-green-300">
         送信しました ✓
@@ -103,6 +111,9 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       <p
         id="form-error"
         class="hidden rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-950 dark:text-red-400"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
       >
       </p>
 
@@ -215,6 +226,16 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
           data.error ??
             'エラーが発生しました。しばらくしてから再度お試しください。'
         );
+        // Reset Turnstile so the user can retry without a page refresh
+        turnstileToken = null;
+        if (
+          typeof (window as unknown as Record<string, unknown>).turnstile !==
+          'undefined'
+        ) {
+          (
+            window as unknown as { turnstile: { reset: (id: string) => void } }
+          ).turnstile.reset('#cf-turnstile');
+        }
         return;
       }
 
@@ -225,6 +246,15 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       showError(
         'ネットワークエラーが発生しました。しばらくしてから再度お試しください。'
       );
+      turnstileToken = null;
+      if (
+        typeof (window as unknown as Record<string, unknown>).turnstile !==
+        'undefined'
+      ) {
+        (
+          window as unknown as { turnstile: { reset: (id: string) => void } }
+        ).turnstile.reset('#cf-turnstile');
+      }
     } finally {
       setLoading(false);
     }
