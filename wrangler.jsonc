@@ -2,5 +2,15 @@
   // https://developers.cloudflare.com/workers/wrangler/configuration/
   "name": "ry2x-homepage",
   "compatibility_date": "2026-02-19",
+  "compatibility_flags": ["nodejs_compat"],
   "pages_build_output_dir": "./dist"
+
+  // Non-secret vars
+  // set PUBLIC_TURNSTILE_SITE_KEY in Cloudflare Dashboard > Pages > Settings > Environment Variables
+
+  // Secrets — set via Cloudflare Dashboard (Pages > Settings > Environment Variables) or:
+  //   wrangler pages secret put RESEND_API_KEY
+  //   wrangler pages secret put TURNSTILE_SECRET_KEY
+  //
+  // For local dev, create `.dev.vars` (see `.dev.vars.example`)
 }
