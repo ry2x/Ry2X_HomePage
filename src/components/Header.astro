@@ -12,7 +12,7 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-4 left-1/2 z-70 w-4/5 -translate-x-1/2 md:w-auto">
+<header class="fixed top-4 left-1/2 z-70 w-4/5 -translate-x-1/2 md:w-max">
   <div
     class="flex w-full items-center gap-6 rounded-full border border-gray-200 bg-white/80 px-5 py-3 shadow-lg shadow-black/5 backdrop-blur-xl md:w-auto dark:border-white/8 dark:bg-black/70 dark:shadow-black/40"
   >
@@ -34,7 +34,7 @@ const navItems = [
     <div class="h-4 w-px bg-gray-200 dark:bg-white/10"></div>
 
     <!-- Nav (desktop) -->
-    <nav class="hidden items-center gap-6 md:flex">
+    <nav class="hidden shrink-0 items-center gap-6 md:flex">
       {
         navItems.map((item) => (
           <a
@@ -54,7 +54,7 @@ const navItems = [
     <div class="flex-1 md:hidden"></div>
 
     <!-- Actions -->
-    <div class="flex items-center gap-3">
+    <div class="flex shrink-0 items-center gap-3">
       <DarkModeToggle />
       <a
         href="/contact"
