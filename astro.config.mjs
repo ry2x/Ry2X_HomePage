@@ -13,7 +13,7 @@ export default defineConfig({
   integrations: [mdx(), sitemap(), icon()],
 
   output: 'static',
-  adapter: cloudflare(),
+  adapter: cloudflare({ imageService: 'compile' }),
 
   site: 'https://ry2x.net',
 
