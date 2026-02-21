@@ -1,8 +1,10 @@
 /// <reference types="astro/client" />
 
-// Extend wrangler-generated Env with bindings not tracked as wrangler secrets
 interface Env {
-  CONTACT_FROM_EMAIL: string;
+  RESEND_API_KEY?: string;
+  TURNSTILE_SECRET_KEY?: string;
+  CONTACT_TO_EMAIL?: string;
+  CONTACT_FROM_EMAIL?: string;
 }
 
 type Runtime = import('@astrojs/cloudflare').Runtime<Env>;
