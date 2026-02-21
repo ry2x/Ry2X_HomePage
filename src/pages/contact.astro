@@ -12,8 +12,11 @@ const formEnabled = Boolean(TURNSTILE_SITE_KEY);
     >
       Contact
     </h1>
-    <p class="mb-8 text-sm text-gray-500 dark:text-gray-400">
+    <p class="mb-4 text-sm text-gray-500 dark:text-gray-400">
       お気軽にどうぞ。通常 1〜2 日以内に返信します。
+    </p>
+    <p class="mb-8 text-sm text-yellow-600 dark:text-yellow-400">
+      現在、DNS設定期間中につき送信ができない状態になっております。ご迷惑おかけします。
     </p>
 
     <!-- Config error fallback -->
@@ -134,6 +137,7 @@ const formEnabled = Boolean(TURNSTILE_SITE_KEY);
       <button
         id="submit-btn"
         type="submit"
+        disabled
         class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-gray-900 px-6 py-3 text-xs font-semibold tracking-widest text-white uppercase transition-all hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50 dark:border-white/10 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
       >
         <span id="btn-label">Send Message</span>
@@ -155,8 +159,11 @@ const formEnabled = Boolean(TURNSTILE_SITE_KEY);
 </BaseLayout>
 
 <!-- Cloudflare Turnstile script -->
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer
-></script>
+<script
+  is:inline
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer></script>
 
 <script>
   let turnstileToken: string | null = null;
