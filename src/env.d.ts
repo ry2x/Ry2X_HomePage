@@ -10,7 +10,17 @@ type CloudflareEnv = {
 };
 
 declare namespace App {
-  interface Locals extends Runtime<CloudflareEnv> {}
+  interface Locals {
+    runtime: Runtime<CloudflareEnv>;
+  }
+}
+
+interface ImportMetaEnv {
+  readonly PUBLIC_TURNSTILE_SITE_KEY: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
 }
 
 declare global {
