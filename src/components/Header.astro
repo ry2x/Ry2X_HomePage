@@ -1,6 +1,7 @@
 ---
 // Header component - Dynamic Island style
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
 import DarkModeToggle from './DarkModeToggle.astro';
 import profileImg from '../assets/home/profile.png';
 
@@ -60,6 +61,10 @@ const navItems = [
         class="hidden rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-xs font-medium tracking-widest whitespace-nowrap text-gray-700 uppercase transition-all hover:bg-gray-100 md:inline-flex dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
       >
         Contact
+        <Icon
+          name="octicon:arrow-up-right-16"
+          class="-mr-px inline translate-y-0.5"
+        />
       </a>
 
       <!-- Placeholder to reserve space for the absolute hamburger button (mobile only) -->
@@ -110,6 +115,10 @@ const navItems = [
       class="mt-4 rounded-full border border-gray-200 bg-gray-50 px-6 py-2 text-sm font-medium tracking-widest text-gray-700 uppercase transition-all hover:bg-gray-100 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
     >
       Contact
+      <Icon
+        name="octicon:arrow-up-right-16"
+        class="-mr-px inline -translate-y-px"
+      />
     </a>
   </nav>
 </div>
