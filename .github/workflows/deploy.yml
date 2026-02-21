@@ -32,6 +32,16 @@ jobs:
 
       - name: Build
         run: pnpm build
+        env:
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
+
+      - name: Set Cloudflare environment variables
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          echo "${{ secrets.CONTACT_TO_EMAIL }}" | pnpm wrangler pages secret put CONTACT_TO_EMAIL --project-name ry2x-homepage
+          echo "${{ secrets.CONTACT_FROM_EMAIL }}" | pnpm wrangler pages secret put CONTACT_FROM_EMAIL --project-name ry2x-homepage
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

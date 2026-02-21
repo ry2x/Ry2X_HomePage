@@ -2,6 +2,7 @@
   "name": "new",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@10.30.0",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --fix",

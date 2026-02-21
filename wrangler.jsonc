@@ -5,10 +5,6 @@
   "compatibility_flags": ["nodejs_compat"],
   "pages_build_output_dir": "./dist"
 
-  // PUBLIC_TURNSTILE_SITE_KEY: set in Cloudflare Dashboard > Pages > Settings > Environment Variables (Build phase)
-  // CONTACT_TO_EMAIL: set in Cloudflare Dashboard > Pages > Settings > Environment Variables
-  // CONTACT_FROM_EMAIL: set in Cloudflare Dashboard > Pages > Settings > Environment Variables
-
   // Secrets — set via Cloudflare Dashboard (Pages > Settings > Environment Variables) or:
   //   wrangler pages secret put RESEND_API_KEY
   //   wrangler pages secret put TURNSTILE_SECRET_KEY
