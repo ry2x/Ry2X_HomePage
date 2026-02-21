@@ -1,7 +1,8 @@
 /// <reference types="astro/client" />
 
-import type { Runtime } from '@astrojs/cloudflare';
-
+/**
+ * Cloudflare 側の環境変数の定義
+ */
 type CloudflareEnv = {
   RESEND_API_KEY: string;
   TURNSTILE_SECRET_KEY: string;
@@ -9,21 +10,23 @@ type CloudflareEnv = {
   CONTACT_FROM_EMAIL: string;
 };
 
-declare namespace App {
-  interface Locals {
-    runtime: Runtime<CloudflareEnv>;
-  }
-}
-
-interface ImportMetaEnv {
-  readonly PUBLIC_TURNSTILE_SITE_KEY: string;
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
-}
-
 declare global {
+  namespace App {
+    interface Locals {
+      runtime: {
+        env: CloudflareEnv;
+      };
+    }
+  }
+
+  interface ImportMetaEnv {
+    readonly PUBLIC_TURNSTILE_SITE_KEY: string;
+  }
+
+  interface ImportMeta {
+    readonly env: ImportMetaEnv;
+  }
+
   interface Window {
     onTurnstileSuccess: (token: string) => void;
     onTurnstileExpired: () => void;
@@ -32,3 +35,5 @@ declare global {
     };
   }
 }
+
+export {};
