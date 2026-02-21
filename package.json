@@ -6,9 +6,9 @@
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --fix",
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
+    "dev": "wrangler types && astro dev",
+    "build": "wrangler types && astro check && astro build",
+    "preview": "wrangler types && astro preview",
     "dev-deploy": "pnpm build && wrangler pages dev",
     "deploy": "wrangler pages deploy",
     "astro": "astro"
@@ -42,7 +42,9 @@
     "wrangler": "^4.67.0"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.6",
     "@astrojs/cloudflare": "^12.6.12",
-    "resend": "^6.9.2"
+    "resend": "^6.9.2",
+    "typescript": "^5.9.3"
   }
 }
