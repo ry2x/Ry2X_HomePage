@@ -34,7 +34,7 @@ jobs:
         run: pnpm wrangler types
 
       - name: Lint
-        run: pnpm lint
+        run: pnpm exec eslint . --max-warnings=0
 
       - name: Astro check
         run: pnpm exec astro check

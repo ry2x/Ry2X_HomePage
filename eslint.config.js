@@ -26,7 +26,8 @@ export default [
       '*.config.js',
       '*.config.mjs',
       '*.config.ts',
-      '.wrangler/**'
+      '.wrangler/**',
+      'worker-configuration.d.ts'
     ]
   },
 
