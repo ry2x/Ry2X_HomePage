@@ -10,6 +10,7 @@ import diracImg from '../assets/home/Paul_Dirac_1933.jpg';
 import profileImg from '../assets/home/profile.png';
 import partuiImg from '../assets/home/par_tui.png';
 import hyprbindImg from '../assets/home/hyprbind.png';
+import blogImg from '../assets/home/blog.png';
 
 const recentPosts = (await getAllPosts()).slice(0, 4);
 
@@ -215,7 +216,7 @@ const diracQuote = {
             par_TUI
           </h3>
           <p class="text-sm text-gray-600 dark:text-gray-400">
-            Arch Linux update manager built with ratatui.
+            Arch Linux のアップデートを管理する ratatui 製 TUI ツール
           </p>
         </div>
         <!-- Image: right half, 3D -->
@@ -251,7 +252,7 @@ const diracQuote = {
             HyprBind
           </h3>
           <p class="text-sm text-gray-600 dark:text-gray-400">
-            Keybinding viewer for Hyprland using egui.
+            Hyprland のキーバインドを egui で可視化するビューアー
           </p>
         </div>
         <!-- Image: right half, 3D -->
@@ -299,7 +300,41 @@ const diracQuote = {
         <div>
           <h3 class="text-lg font-bold text-white">Ryprland</h3>
           <p class="mt-0.5 text-xs text-white/60">
-            My Arch Linux Dotfile using hyprland.
+            最強の自己満足を追求する美しいHyprland環境
+          </p>
+        </div>
+      </div>
+    </a>
+
+    <!-- This website — 1col × 4row -->
+    <a
+      href="/projects/personal-homepage"
+      class="group relative col-span-1 min-h-36 overflow-hidden rounded-3xl border border-gray-200 bg-black md:row-span-4 dark:border-white/10"
+    >
+      <!-- Background image -->
+      <Image
+        src={blogImg}
+        alt=""
+        width={800}
+        height={450}
+        class="absolute inset-0 h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
+        aria-hidden="true"
+        loading="eager"
+      />
+      <!-- Overlay -->
+      <div
+        class="absolute inset-0 bg-linear-to-b from-black/40 via-black/20 to-black/65 transition-opacity duration-700 group-hover:opacity-30"
+      >
+      </div>
+      <div class="relative flex h-full flex-col p-6">
+        <span
+          class="mb-auto inline-flex w-fit items-center rounded-full border border-blue-300/40 bg-black/30 px-2 pt-1.5 pb-1 font-mono text-[10px] leading-none tracking-widest text-blue-300 uppercase backdrop-blur-sm"
+          >HomePage</span
+        >
+        <div>
+          <h3 class="text-lg font-bold text-white">Ry2X.NET</h3>
+          <p class="mt-0.5 text-xs text-white/60">
+            Astro v5 と Tailwind CSS v4 で構築した個人サイト
           </p>
         </div>
       </div>
@@ -307,7 +342,7 @@ const diracQuote = {
 
     <!-- COMMIT filler — 2col × 4row -->
     <div
-      class="group relative col-span-1 min-h-36 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-2 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
+      class="group relative col-span-1 min-h-36 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:col-span-1 md:row-span-4 dark:border-white/10 dark:bg-zinc-900"
     >
       <div
         class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
@@ -334,7 +369,7 @@ const diracQuote = {
           COMMIT
         </div>
         <p class="text-xs text-gray-400 dark:text-gray-600">
-          Continuous development in Rust...
+          Continuous development...
         </p>
       </div>
     </div>
@@ -371,9 +406,9 @@ const diracQuote = {
         </div>
       </a>
 
-      <!-- Zenn Blog -->
+      <!-- Qiita Blog -->
       <a
-        href="https://zenn.dev"
+        href="https://qiita.com/ry2x"
         target="_blank"
         rel="noopener noreferrer"
         class="group relative min-h-24 overflow-hidden rounded-3xl border border-gray-200 bg-zinc-100 md:row-span-2 dark:border-white/10 dark:bg-zinc-900"
@@ -392,7 +427,7 @@ const diracQuote = {
           <span
             class="text-base font-bold text-gray-400 transition-colors group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
             ><Icon name="octicon:note-16" class="mr-1 inline-block h-5 w-5" />
-            Zenn ↗</span
+            Qiita ↗</span
           >
         </div>
       </a>
