@@ -1,7 +1,7 @@
 ---
 title: 'Ryprland — Dotfiles'
 date: '2026-02-19'
-description: 'Hyprland を使った Arch Linux のドットファイル。'
+description: '私が普段使いしているHyprlandの設定ファイル'
 tags: ['arch-linux', 'hyprland', 'dotfiles']
 draft: false
 ---
