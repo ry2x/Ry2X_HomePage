@@ -1,5 +1,5 @@
 ---
-title: 'Ry2X.NET — 思想と技術が交差する個人ホームページ'
+title: 'Ry2X.NET - 思想と技術が交差する個人ホームページ'
 date: '2026-02-19'
 description: 'Astro v5 と Tailwind CSS v4 で構築した、個人サイトの設計全貌'
 tags: ['astro', 'tailwind', 'typescript', 'cloudflare']
