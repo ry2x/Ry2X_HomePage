@@ -17,6 +17,12 @@ export default defineConfig({
 
   site: 'https://ry2x.net',
 
+  markdown: {
+    shikiConfig: {
+      theme: 'dracula'
+    }
+  },
+
   vite: {
     plugins: [tailwindcss()]
   }

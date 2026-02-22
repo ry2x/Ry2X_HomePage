@@ -13,12 +13,7 @@ export default {
               color: '#6B7280'
             },
             'a': {
-              'color': '#2563EB',
-              'textDecoration': 'underline',
-              'fontWeight': '500',
-              '&:hover': {
-                color: '#1D4ED8'
-              }
+              fontWeight: '500'
             },
             'strong': {
               color: '#111827',
@@ -36,7 +31,7 @@ export default {
             },
             'code': {
               color: '#111827',
-              backgroundColor: '#F3F4F6',
+              backgroundColor: 'var(--tw-prose-pre-bg)',
               paddingLeft: '0.25rem',
               paddingRight: '0.25rem',
               paddingTop: '0.125rem',
@@ -59,6 +54,12 @@ export default {
               backgroundColor: 'transparent',
               color: 'inherit',
               padding: '0'
+            },
+            'table': {
+              'font-size': '0.9rem'
+            },
+            'thead': {
+              'border-bottom-width': '2px'
             }
           }
         }
