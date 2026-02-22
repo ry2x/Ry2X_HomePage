@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
+
+type ErrorPageProps = {
+  error?: unknown;
+};
+
+const { error } = Astro.props as ErrorPageProps;
+const statusCode = 500;
+const errorMessage =
+  error instanceof Error ? error.message : 'An unexpected error occurred.';
+---
+
+<BaseLayout
+  title={`${statusCode} - Ry2X.NET`}
+  description="Internal Server Error"
+>
+  <div
+    class="flex min-h-[70vh] flex-col items-center justify-center text-center"
+  >
+    <p
+      class="mb-3 font-mono text-[10px] tracking-widest text-gray-400 uppercase dark:text-gray-600"
+    >
+      Error
+    </p>
+    <h1
+      class="mb-4 font-mono text-8xl font-black text-gray-900/10 select-none dark:text-white/10"
+    >
+      {statusCode}
+    </h1>
+    <p class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+      {errorMessage}
+    </p>
+    <p class="mb-8 text-sm text-gray-500 dark:text-gray-400">
+      Please try again later or contact us from
+      <a
+        href="/contact"
+        class="text-blue-600 underline decoration-blue-500/50 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+      >
+        here
+      </a>
+      if the issue persists.
+    </p>
+    <a
+      href="/"
+      class="btn-slide btn-slide-primary rounded-full border border-blue-400/40 px-5 py-2 font-mono text-xs text-blue-500 dark:text-blue-400"
+    >
+      <Icon name="octicon:arrow-left-16" class="inline" /> Back to Home
+    </a>
+  </div>
+</BaseLayout>
