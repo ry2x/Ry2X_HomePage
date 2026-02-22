@@ -13,12 +13,7 @@ export default {
               color: '#6B7280'
             },
             'a': {
-              'color': 'inherit',
-              'textDecoration': 'underline',
-              'fontWeight': '500',
-              '&:hover': {
-                color: '#1D4ED8'
-              }
+              fontWeight: '500'
             },
             'strong': {
               color: '#111827',
