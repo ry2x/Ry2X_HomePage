@@ -137,50 +137,52 @@ function isActive(href: string) {
 </div>
 
 <script>
-  const toggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('mobile-menu');
+  document.addEventListener('astro:page-load', () => {
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
 
-  if (toggle && menu) {
-    const btn = toggle;
-    const drawer = menu;
-    let open = false;
+    if (toggle && menu) {
+      const btn = toggle;
+      const drawer = menu;
+      let open = false;
 
-    function applyMenu() {
-      drawer.style.opacity = open ? '1' : '0';
-      drawer.style.pointerEvents = open ? 'auto' : 'none';
-      drawer.setAttribute('aria-hidden', String(!open));
-      document.body.style.overflow = open ? 'hidden' : '';
-      btn.setAttribute('aria-expanded', String(open));
+      function applyMenu() {
+        drawer.style.opacity = open ? '1' : '0';
+        drawer.style.pointerEvents = open ? 'auto' : 'none';
+        drawer.setAttribute('aria-hidden', String(!open));
+        document.body.style.overflow = open ? 'hidden' : '';
+        btn.setAttribute('aria-expanded', String(open));
 
-      const lines = btn.getElementsByTagName('span');
-      if (open) {
-        lines[0].style.transform = 'translateY(8px) rotate(45deg)';
-        lines[1].style.opacity = '0';
-        lines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
-      } else {
-        lines[0].style.transform = '';
-        lines[1].style.opacity = '';
-        lines[2].style.transform = '';
+        const lines = btn.getElementsByTagName('span');
+        if (open) {
+          lines[0].style.transform = 'translateY(8px) rotate(45deg)';
+          lines[1].style.opacity = '0';
+          lines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+        } else {
+          lines[0].style.transform = '';
+          lines[1].style.opacity = '';
+          lines[2].style.transform = '';
+        }
       }
-    }
 
-    btn.addEventListener('click', () => {
-      open = !open;
-      applyMenu();
-    });
-
-    drawer.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => {
-        open = false;
+      btn.addEventListener('click', () => {
+        open = !open;
         applyMenu();
       });
-    });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && open) {
-        open = false;
-        applyMenu();
-      }
-    });
-  }
+      drawer.querySelectorAll('a').forEach((a) => {
+        a.addEventListener('click', () => {
+          open = false;
+          applyMenu();
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && open) {
+          open = false;
+          applyMenu();
+        }
+      });
+    }
+  });
 </script>
