@@ -15,9 +15,12 @@ import { Icon } from 'astro-icon/components';
 </button>
 
 <script>
-  const btn = document.getElementById('theme-toggle');
-  btn?.addEventListener('click', () => {
-    const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  document.addEventListener('astro:page-load', () => {
+    const btn = document.getElementById('theme-toggle');
+
+    btn?.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
   });
 </script>
