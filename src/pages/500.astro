@@ -2,14 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
 
-type ErrorPageProps = {
-  error?: unknown;
-};
-
-const { error } = Astro.props as ErrorPageProps;
 const statusCode = 500;
-const errorMessage =
-  error instanceof Error ? error.message : 'An unexpected error occurred.';
+const errorMessage = 'An unexpected error occurred.';
 ---
 
 <BaseLayout
